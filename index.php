@@ -10,11 +10,6 @@
   <title>Index</title>
 </head>
 <body>
-  <?php
-  
-  include("connect.php");
-  
-  ?>
   <div class="auction">
   <div class="item">
     <img  class="item" src="golden vase.png" alt="currently selling item">
@@ -23,6 +18,15 @@
     <button class="btn btn-primary" type="button">Button</button>
   </div>
   </div>
+  <?php
+  
+  require_once "connect_2.php";
+  $sql = "SELECT * FROM test";
+  $result = mysqli_query($link, $sql) or die(mysqli_error($link));
+
+  echo $sql
+  
+  ?>
   
 </body>
 </html>
