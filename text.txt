@@ -1,0 +1,23 @@
+IP db.gyarab.cz: 178.248.248.164
+
+<!-- <?php
+$servername = "localhost";
+$username = "username";
+$password = "password";
+
+$conn = new mysqli($servername, $username, $password);
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+echo "Connected successfully";
+?>  -->
+
+
+$user = "db-308";
+$password = "6ug2rvoi";
+$db = "";
+$host = "";
+
+exec('ssh -f -L 3307:178.248.248.164:3306 sleep 10  /dev/null');
+$mysqli = new mysqli('127.0.0.1', '$user', '$password', '$database', '3307');
