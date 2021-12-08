@@ -14,6 +14,7 @@
   
   include("connect.php");
   
+  
   ?>
   <div class="auction">
   <div class="item">
