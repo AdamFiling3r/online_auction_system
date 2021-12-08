@@ -24,6 +24,15 @@
     <button class="btn btn-primary" type="button">Button</button>
   </div>
   </div>
+  <?php
+  
+  require_once "connect_2.php";
+  $sql = "SELECT * FROM test";
+  $result = mysqli_query($link, $sql) or die(mysqli_error($link));
+
+  echo $sql
+  
+  ?>
   
 </body>
 </html>
