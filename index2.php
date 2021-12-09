@@ -10,12 +10,6 @@
   <title>Index</title>
 </head>
 <body>
-  <?php
-  
-  include("connect.php");
-  
-  
-  ?>
   <div class="auction">
   <div class="item">
     <img  class="item" src="golden vase.png" alt="currently selling item">
@@ -26,11 +20,16 @@
   </div>
   <?php
   
-  require_once "connect_2.php";
+  include_once "connect_2.php";
   $sql = "SELECT * FROM test";
-  $result = mysqli_query($link, $sql) or die(mysqli_error($link));
-
-  echo $sql
+  $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+  while($row = mysqli_fetch_array($result)){
+    foreach($row as $row){
+      print_r($row);
+    }
+  }
+  mysqli_close($conn);
+  
   
   ?>
   
