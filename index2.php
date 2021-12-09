@@ -20,15 +20,14 @@
   </div>
   <?php
   
-  include_once "connect_2.php";
-  $sql = "SELECT * FROM test";
-  $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-  while($row = mysqli_fetch_array($result)){
-    foreach($row as $row){
-      print_r($row);
-    }
-  }
-  mysqli_close($conn);
+   include_once "connect_2.php";
+  // $sql = "SELECT * FROM test";
+  // $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+  // while($row = mysqli_fetch_assoc($result)){
+  //   echo $row["f"];
+  // }
+  // mysqli_free_result($result);
+  // mysqli_close($conn);
   
   
   ?>

@@ -23,3 +23,7 @@ exec('ssh -f -L 3307:178.248.248.164:3306 sleep 10  /dev/null');
 $mysqli = new mysqli('127.0.0.1', '$user', '$password', '$database', '3307');
 
 $ ssh dk-308@db.gyarab.cz -L 3306:dk-308@db.gyarab.cz:22
+
+Database host: sql4.freemysqlhosting.net
+Databse Name/Username: sql4457624
+Databse password: UBNemP9Mjk
