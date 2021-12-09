@@ -1,4 +1,5 @@
 IP db.gyarab.cz: 178.248.248.164
+Website: https://adamfiling3r.github.io/rocnikovka_aukce/
 
 <!-- <?php
 $servername = "localhost";
