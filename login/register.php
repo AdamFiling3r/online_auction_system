@@ -16,7 +16,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username_err = "Username can only contain letters, numbers, and underscores.";
     } else{
         // Prepare a select statement
+<<<<<<< HEAD
         $sql = "SELECT id FROM users WHERE username = ?";
+=======
+        $sql = "SELECT id FROM users";
+>>>>>>> b3a6da6bb5fdb2dda95198ee62e8b848efaeb361
         
         if($stmt = mysqli_prepare($conn, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -69,7 +73,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare an insert statement
         $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
          
+<<<<<<< HEAD
         if($stmt = mysqli_prepare($conn, $sql)){
+=======
+        if($stmt = mysqli_prepare($link, $sql)){
+>>>>>>> b3a6da6bb5fdb2dda95198ee62e8b848efaeb361
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
             
@@ -91,7 +99,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Close connection
+<<<<<<< HEAD
     mysqli_close($conn);
+=======
+    mysqli_close($link);
+>>>>>>> b3a6da6bb5fdb2dda95198ee62e8b848efaeb361
 }
 ?>
  

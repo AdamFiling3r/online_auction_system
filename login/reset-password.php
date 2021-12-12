@@ -9,7 +9,11 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
  
 // Include config file
+<<<<<<< HEAD
 require_once "connect_2.php";
+=======
+require_once "config.php";
+>>>>>>> b3a6da6bb5fdb2dda95198ee62e8b848efaeb361
  
 // Define variables and initialize with empty values
 $new_password = $confirm_password = "";
@@ -42,7 +46,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         // Prepare an update statement
         $sql = "UPDATE users SET password = ? WHERE id = ?";
         
+<<<<<<< HEAD
         if($stmt = mysqli_prepare($conn, $sql)){
+=======
+        if($stmt = mysqli_prepare($link, $sql)){
+>>>>>>> b3a6da6bb5fdb2dda95198ee62e8b848efaeb361
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "si", $param_password, $param_id);
             
@@ -66,7 +74,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Close connection
+<<<<<<< HEAD
     mysqli_close($conn);
+=======
+    mysqli_close($link);
+>>>>>>> b3a6da6bb5fdb2dda95198ee62e8b848efaeb361
 }
 ?>
  
