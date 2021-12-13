@@ -10,27 +10,38 @@
   <title>Index</title>
 </head>
 <body>
-  <div class="auction">
-  <div class="item">
-    <img  class="item" src="golden vase.png" alt="currently selling item">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="register.php">Register</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.php">Login</a>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="d-grid gap-2 col-2 mx-auto raise">
-    <button class="btn btn-primary" type="button">Button</button>
+</nav>
+
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="golden vase.png" class="img-fluid rounded-start" alt="golden vase">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
   </div>
-  </div>
-  <?php
-  
-   include_once "connect_2.php";
-  // $sql = "SELECT * FROM test";
-  // $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-  // while($row = mysqli_fetch_assoc($result)){
-  //   echo $row["f"];
-  // }
-  // mysqli_free_result($result);
-  // mysqli_close($conn);
-  
-  
-  ?>
-  
+</div>
 </body>
 </html>
