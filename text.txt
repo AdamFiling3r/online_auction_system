@@ -28,3 +28,5 @@ $ ssh dk-308@db.gyarab.cz -L 3306:dk-308@db.gyarab.cz:22
 Database host: sql4.freemysqlhosting.net
 Databse Name/Username: sql4457624
 Databse password: UBNemP9Mjk
+
+Email verification: https://www.tutsmake.com/user-registration-with-email-verification-in-php/
