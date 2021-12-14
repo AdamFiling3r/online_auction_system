@@ -24,6 +24,9 @@
         <li class="nav-item">
           <a class="nav-link" href="login.php">Login</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="creatingForm.php">Create new offer</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -43,5 +46,10 @@
     </div>
   </div>
 </div>
+
+<button onclick="getElementById('newSite').innerHTML = 'world'">Create new site</button>
+
+
+
 </body>
 </html>
