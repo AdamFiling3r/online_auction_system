@@ -15,6 +15,10 @@
 </head>
 
 <body>
+<?php
+include_once "navbar.php";
+?>
+
     <div>
         <div class="mb-3">
             <label for="formFile" class="form-label">Default file input example</label>

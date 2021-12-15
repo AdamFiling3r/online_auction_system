@@ -1,3 +1,7 @@
+<?php
+require_once "connect_2.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,27 +14,10 @@
   <title>Index</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="register.php">Register</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="login.php">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="creatingForm.php">Create new offer</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+  
+<?php
+include_once "navbar.php";
+?>
 
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
@@ -46,10 +33,5 @@
     </div>
   </div>
 </div>
-
-<button onclick="getElementById('newSite').innerHTML = 'world'">Create new site</button>
-
-
-
 </body>
 </html>
