@@ -20,7 +20,6 @@ session_start();
 include_once "navbar.php";
 ?>
 
-
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
