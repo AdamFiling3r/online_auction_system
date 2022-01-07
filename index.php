@@ -1,5 +1,5 @@
 <?php
-require_once "connect_2.php";
+require_once "includes/connect_2.php";
 session_start();
 ?>
 
