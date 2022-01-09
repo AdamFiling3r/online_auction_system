@@ -1,10 +1,10 @@
 <?php
-     define("user", "sql4457624");
-     define("password", "UBNemP9Mjk");
-     define("db", "sql4457624");
-     define("host", "sql4.freemysqlhosting.net");
+    $user = "sql4457624";
+    $password = "UBNemP9Mjk";
+    $db = "sql4457624";
+     $host = "sql4.freemysqlhosting.net";
 
-     $conn = mysqli_connect(host, user, password, db);
+     $conn = mysqli_connect($host, $user, $password, $db);
      if(!$conn){
          die("Connection failed: " . mysqli_connect_error());
      }
