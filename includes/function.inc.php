@@ -98,15 +98,15 @@
         $userExists = userExists($username, $username, $conn);
 
         if($userExists === false){
-            header("location: ../login.php?error=wrongLogin");
+            header("location: ../login.php?error=hovno");
             exit();
         }
 
-        $password_hash = $userExists["password"];
-        $checkPass = password_verify($password, $password_hash);
-
+    $password_hash = $userExists["password"];
+    $checkPass = password_verify($password, $password_hash);
+        
         if($checkPass === false){
-            header("location: ../login.php?error=wrongLogin");
+            header("location: ../login.php?error=penis");
             exit();
         }else if($checkPass === true){
             session_start();
