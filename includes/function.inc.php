@@ -94,6 +94,16 @@
         return $result;
     }
 
+    function emptyInput($text){
+        $result = false;
+        if(empty($text)){
+            $result = true;
+        } else{
+            $resul = false;
+        }
+        return $result;
+    }
+
     function loginUser($conn, $username, $password){
         $userExists = userExists($username, $username, $conn);
 
@@ -115,6 +125,13 @@
             header("location: ../index.php");
             exit();
         }
+    }
+
+    function createNewPage($text){
+        $f = fopen($text, "w");
+        fwrite($f, $text);;
+        fclose($f);
+
     }
 
 
