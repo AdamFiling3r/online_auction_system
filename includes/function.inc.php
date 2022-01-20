@@ -66,7 +66,7 @@
     }
 
     function createUser($conn, $username, $email, $name, $password){
-        $sql = "INSERT INTO users (username, email, password, folder, name) VALUES (?, ?, ?, ?, ?);";
+        $sql = "INSERT INTO users (name, username, password, email, folder) VALUES (?, ?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header("location: ../register.php?error=stmtfailed");
@@ -76,7 +76,7 @@
         $hass_password = password_hash($password, PASSWORD_DEFAULT);
         $user_folder = "$username-offers";
 
-        mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $hass_password, $user_folder, $name);
+        mysqli_stmt_bind_param($stmt, "sssss", $name, $username, $hass_password, $email, $user_folder);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 

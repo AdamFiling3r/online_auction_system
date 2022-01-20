@@ -1,8 +1,8 @@
 <?php
-    $user = "root";
-    $password_db = "";
-    $db = "rocnikovka_aukce";
-    $host = "localhost";
+    $user = "epiz_30862495";
+    $password_db = "KahounNefunguje123";
+    $db = "epiz_30862495_rocnikovka_aukce";
+    $host = "sql301.epizy.com";
 
      $conn = mysqli_connect($host, $user, $password_db, $db);
      if(!$conn){
