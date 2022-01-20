@@ -66,7 +66,7 @@
     }
 
     function createUser($conn, $username, $email, $name, $password){
-        $sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?);";
+        $sql = "INSERT INTO users (username, email, password, folder, name) VALUES (?, ?, ?, ?, ?);";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header("location: ../register.php?error=stmtfailed");
@@ -74,10 +74,13 @@
         }
 
         $hass_password = password_hash($password, PASSWORD_DEFAULT);
+        $user_folder = "$username-offers";
 
-        mysqli_stmt_bind_param($stmt, "sss", $username, $hass_password, $email);
+        mysqli_stmt_bind_param($stmt, "sssss", $username, $email, $hass_password, $user_folder, $name);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
+
+        mkdir("../offers//$user_folder");
 
         header("location: ../login.php?error=none");
         exit();
@@ -128,9 +131,11 @@
     }
 
     function createNewPage($text){
-        $f = fopen($text, "w");
-        fwrite($f, $text);;
+        $user = $_SESSION['username'];
+        $f = fopen("../offers/$user-offers/$text", "w");
+        fwrite($f, $text);
         fclose($f);
+        header("location: ../index.php");
 
     }
 

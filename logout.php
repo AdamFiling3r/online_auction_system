@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once "includes/connect.php";
  
 // Unset all of the session variables

@@ -17,9 +17,6 @@
                       <li class="nav-item">
                         <a class="nav-link" href="vision.php">Vision</a>
                       </li>
-                      <li class="nav-item">
-                        <a class="nav-link" href="form.php">Form</a>
-                      </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
         <?php
@@ -33,6 +30,9 @@
           echo "<li class='nav-item'>";
           echo "<a class='nav-link' href='logout.php'>Logout</a>";
           echo "</li>";
+          echo "<li class='nav-item'>
+          <a class='nav-link' href='creatingForm.php'>Form</a>
+        </li>";
         } else {
           echo "<li class='nav-item'>";
           echo "<a class='nav-link' href='register.php'>Register</a>";
