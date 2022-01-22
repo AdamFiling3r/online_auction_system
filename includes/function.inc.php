@@ -74,13 +74,16 @@
         }
 
         $hass_password = password_hash($password, PASSWORD_DEFAULT);
-        $user_folder = "$username-offers";
+        $user_offers = "$username-offers";
+        $user_purchases = "$username-purchases";
 
         mysqli_stmt_bind_param($stmt, "sssss", $name, $username, $hass_password, $email, $user_folder);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
-        mkdir("../offers//$user_folder");
+        mkdir("../users/$username");
+        mkdir("../users/$username/$user_offers");
+        mkdir("../users/$username/$user_purchases");
 
         header("location: ../login.php?error=none");
         exit();
@@ -130,12 +133,13 @@
         }
     }
 
-    function createNewPage($text){
+    function createNewPage($text, $offer){
         $user = $_SESSION['username'];
-        $f = fopen("../offers/$user-offers/$text", "w");
-        fwrite($f, $text);
+        $f = fopen("../users/$user/$user-offers/$text.php", "w");
+        fwrite($f, $offer);
         fclose($f);
-        header("location: ../index.php");
+        // copy("newOfferTemplate.php",  "../offers/$user-offers/$text.php");
+        header("location: ../users/$user/$user-offers/$text.php");
 
     }
 
