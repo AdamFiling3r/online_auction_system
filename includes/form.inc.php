@@ -11,7 +11,7 @@ if(isset($_POST['submit'])){
       exit();
     }
     
-    createNewPage($text, $offer);
+    createNewPage($text, $conn);
 
 }else{
   header("location: ../form.php");

@@ -128,18 +128,41 @@
             session_start();
             $_SESSION["username"] = $userExists["username"];
             $_SESSION["loggedin"] = true;
+            $_SESSION["id"] = $userExists["id"];
             header("location: ../index.php");
             exit();
         }
     }
 
-    function createNewPage($text, $offer){
+    function randomString() {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+      
+        for ($i = 0; $i < 6; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+      
+        return $randomString;
+    }
+
+    function createNewPage($text, $conn){
         $user = $_SESSION['username'];
-        $f = fopen("../users/$user/$user-offers/$text.php", "w");
-        fwrite($f, $offer);
-        fclose($f);
-        // copy("newOfferTemplate.php",  "../offers/$user-offers/$text.php");
-        header("location: ../users/$user/$user-offers/$text.php");
+        $Uid = $_SESSION["id"];
+        $img = " ";
+        $randomStr = randomString();
+        $descripPath = "users/$user/$user-descrip/$randomStr.txt";
+        $sql = "INSERT INTO offers (Uid, descrip, img) VALUES (?, ?, ?);";
+        $stmt = mysqli_stmt_init($conn);
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header("location ../creatingForm.php?erorr=stmtfailed");
+            exit();
+        } else{
+            mysqli_stmt_bind_param($stmt, "sss", $Uid, $descripPath, $img);
+            mysqli_stmt_execute($stmt);
+            mysqli_stmt_close($stmt);
+
+        }
 
     }
 
