@@ -33,6 +33,9 @@
           echo "<li class='nav-item'>
           <a class='nav-link' href='creatingForm.php'>Form</a>
         </li>";
+          echo '<li class="nav-item">
+          <a class="nav-link" href="templates.php">Template</a>
+        </li>';
         } else {
           echo "<li class='nav-item'>";
           echo "<a class='nav-link' href='register.php'>Register</a>";

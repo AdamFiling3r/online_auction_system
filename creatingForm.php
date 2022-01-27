@@ -20,8 +20,9 @@ include_once "includes/connect.php";
     ?>
 
     <section class="newPageForm">
-    <form action="includes/form.inc.php" method="post">  
+    <form enctype="multipart/form-data" action="includes/form.inc.php" method="post">  
         <input type="text" name="text" placeholder="Type something">
+        <input type="file" name="image">
         <button type="submit" name="submit">Submit</button>
     </form>
 </section>

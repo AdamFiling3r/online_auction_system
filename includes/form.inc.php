@@ -1,17 +1,18 @@
 <?php
 if(isset($_POST['submit'])){
     $text = $_POST['text'];
+    $img = $_FILES["image"];
 
     require_once 'connect.php';
     require_once 'function.inc.php';
-    require_once "templates.php";
 
     if(emptyInput($text) !== false){
       header("location ../form.php?error=emptytext");
       exit();
     }
-    
-    createNewPage($text, $conn);
+
+    createNewPage($text, $conn, $img);
+    header("location: ../index.php");
 
 }else{
   header("location: ../form.php");
