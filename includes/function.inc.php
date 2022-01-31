@@ -211,3 +211,9 @@ function userPage($conn)
         return $result;
     }
 }
+
+function dataUri($file, $mime){
+    $contents = file_get_contents($file);
+    $base64   = base64_encode($contents); 
+    return ('data:' . $mime . ';base64,' . $base64);
+}

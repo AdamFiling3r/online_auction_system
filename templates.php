@@ -20,9 +20,17 @@ include_once "navbar.php";
 ?>
 
 <body>
-    <p><?php echo $text?></p>
-    <img src="<?php echo $descrip_path[1] ?>" alt="obrazek" width="300" height="300">
-    
+    <?php
+    // for($y = 0; $y < sizeof($descrip_path); $y++){
+    //     for($i = 0; $i < sizeof($descrip_path); $i++){
+    //         include_once "includes/template_card.inc.php";
+    //     }
+    // }
+    for ($y = 0; $y < sizeof($result); $y++) {
+        include("includes/template_card.inc.php");
+    }
+    ?>
+
 </body>
 
 </html>
