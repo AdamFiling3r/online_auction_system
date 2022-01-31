@@ -79,16 +79,16 @@ function createUser($conn, $username, $email, $name, $password)
     }
 
     $hass_password = password_hash($password, PASSWORD_DEFAULT);
-    $user_offers = "$username-offers";
-    $user_purchases = "$username-purchases";
+    $user_descrip = "$username-descrip";
+    $user_img = "$username-img";
 
     mysqli_stmt_bind_param($stmt, "sssss", $name, $username, $hass_password, $email, $user_folder);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
     mkdir("../users/$username");
-    mkdir("../users/$username/$user_offers");
-    mkdir("../users/$username/$user_purchases");
+    mkdir("../users/$username/$user_descrip");
+    mkdir("../users/$username/$user_img");
 
     header("location: ../login.php?error=none");
     exit();
