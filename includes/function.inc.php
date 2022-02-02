@@ -71,7 +71,7 @@ function userExists($username, $email, $conn)
 
 function createUser($conn, $username, $email, $name, $password)
 {
-    $sql = "INSERT INTO users (name, username, password, email, folder) VALUES (?, ?, ?, ?, ?);";
+    $sql = "INSERT INTO users (name, username, password, email) VALUES (?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../register.php?error=stmtfailed");
@@ -82,7 +82,7 @@ function createUser($conn, $username, $email, $name, $password)
     $user_descrip = "$username-descrip";
     $user_img = "$username-img";
 
-    mysqli_stmt_bind_param($stmt, "sssss", $name, $username, $hass_password, $email, $user_folder);
+    mysqli_stmt_bind_param($stmt, "ssss", $name, $username, $hass_password, $email);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
 
@@ -133,9 +133,8 @@ function loginUser($conn, $username, $password)
         exit();
     } else if ($checkPass === true) {
         session_start();
-        $_SESSION["username"] = $userExists["username"];
+        $_SESSION = $userExists;
         $_SESSION["loggedin"] = true;
-        $_SESSION["id"] = $userExists["id"];
         header("location: ../index.php");
         exit();
     }
@@ -160,10 +159,10 @@ function createNewPage($text, $conn, $img)
     $Uid = $_SESSION["id"];
     $randomStr = randomString();
     $descripPath = "users/$user/$user-descrip/$randomStr.txt";
-    $imgPath = "users/$user/$user-img/".$img["name"];
+    $imgPath = "users/$user/$user-img/" . $img["name"];
 
     if (is_uploaded_file($img["tmp_name"])) {
-        if (move_uploaded_file($img["tmp_name"], "../".$imgPath)) {
+        if (move_uploaded_file($img["tmp_name"], "../" . $imgPath)) {
         } else {
             header("location: ../creatingForm.php?erorr=couldNotMoveToDest");
             exit;
@@ -202,18 +201,8 @@ function userPage($conn)
     } else {
         mysqli_stmt_bind_param($stmt, "s", $Uid);
         mysqli_stmt_execute($stmt);
-        // $result = array();
         $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
-        // while($row = mysqli_fetch_array(mysqli_stmt_get_result($stmt))){
-        //     $result[] = $row["descrip"];
-        // }
         mysqli_stmt_close($stmt);
         return $result;
     }
-}
-
-function dataUri($file, $mime){
-    $contents = file_get_contents($file);
-    $base64   = base64_encode($contents); 
-    return ('data:' . $mime . ';base64,' . $base64);
 }

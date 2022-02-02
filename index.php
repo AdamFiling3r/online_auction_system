@@ -16,31 +16,9 @@ require_once "includes/connect.php";
 
     <!-- Navbar -->
 
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3">
-        <div class="container">
-            <a href="#" class="navbar-brand">Online Auction Systems</a>
-
-            <button 
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse" 
-            data-bs-target="#navmenu"
-            >
-            <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navmenu">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a href="login.php" class="nav-link text-warning">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="register.php" class="nav-link text-success">Register</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <?php
+    include_once("navbar.php");
+    ?>
 
     <!-- Showcase -->
     
