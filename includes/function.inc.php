@@ -153,7 +153,7 @@ function randomString()
     return $randomString;
 }
 
-function createNewPage($text, $conn, $img)
+function createNewPage($text, $conn, $img, $date, $price)
 {
     $user = $_SESSION['username'];
     $Uid = $_SESSION["id"];
@@ -173,13 +173,13 @@ function createNewPage($text, $conn, $img)
     }
 
 
-    $sql = "INSERT INTO offers (Uid, descrip, img) VALUES (?, ?, ?);";
+    $sql = "INSERT INTO offers (Uid, descrip, img, expiration_date, price) VALUES (?, ?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../creatingForm.php?erorr=stmtfailed");
         exit();
     } else {
-        mysqli_stmt_bind_param($stmt, "sss", $Uid, $descripPath, $imgPath);
+        mysqli_stmt_bind_param($stmt, "sssss", $Uid, $descripPath, $imgPath, $date, $price);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 
@@ -192,6 +192,7 @@ function createNewPage($text, $conn, $img)
 
 function userPage($conn)
 {
+
     $Uid = $_SESSION["id"];
     $sql = "SELECT descrip, img FROM offers WHERE Uid = ?;";
     $stmt = mysqli_stmt_init($conn);
@@ -204,5 +205,50 @@ function userPage($conn)
         $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
         mysqli_stmt_close($stmt);
         return $result;
+    }
+}
+
+function fromDB($conn, $url)
+{
+
+    $Uid = $_SESSION["id"];
+
+    $stmt = mysqli_stmt_init($conn);
+    if ($url == "/templates.php") {
+        $sql = "SELECT * FROM offers WHERE Uid = ? ORDER BY created_at desc;";
+    } elseif ($url == "/allOffers.php") {
+        $sql = "SELECT * FROM offers ORDER BY created_at desc;";
+    }
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: index.php?erorr=$url");
+        exit();
+    } else {
+        if ($url == "/templates.php") {
+            mysqli_stmt_bind_param($stmt, "s", $Uid);
+        }
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
+        mysqli_stmt_close($stmt);
+        // print_r($result);
+        return $result;
+    }
+}
+
+function intoDB($conn, $balance, $url)
+{
+    $id = $_SESSION["id"];
+
+    $stmt = mysqli_stmt_init($conn);
+    if ($url == "/includes/DBInsert.inc.php") {
+        $sql = "UPDATE users SET balance = balance + ? WHERE id = ?;";
+    }
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../index.php?erorr=$url");
+        exit();
+    } else {
+        mysqli_stmt_bind_param($stmt, "is", $balance, $id);
+        mysqli_stmt_execute($stmt);
+        mysqli_stmt_close($stmt);
+        header("location: ../index.php");
     }
 }

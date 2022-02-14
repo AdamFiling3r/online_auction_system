@@ -2,6 +2,8 @@
 if(isset($_POST['submit'])){
     $text = $_POST['text'];
     $img = $_FILES["image"];
+    $price = $_POST["price"];
+    $date = $_POST["expiration_date"];
 
     require_once 'connect.php';
     require_once 'function.inc.php';
@@ -11,7 +13,7 @@ if(isset($_POST['submit'])){
       exit();
     }
 
-    createNewPage($text, $conn, $img);
+    createNewPage($text, $conn, $img, $date, $price);
     header("location: ../index.php");
 
 }else{

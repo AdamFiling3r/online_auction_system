@@ -13,6 +13,7 @@
         }else{
           include_once("navbar_base.php");
         }
+        
         ?>
       </ul>
     </div>

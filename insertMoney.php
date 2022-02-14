@@ -11,7 +11,7 @@ include_once "includes/connect.php";
   <link href="style.css" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Form</title>
+    <title>Insert Money</title>
 </head>
 
 <body>
@@ -19,12 +19,9 @@ include_once "includes/connect.php";
     include_once "navbar.php";
     ?>
 
-    <section class="newPageForm">
-    <form enctype="multipart/form-data" action="includes/form.inc.php" method="post">  
-        <input type="text" name="text" placeholder="Type something">
-        <input type="file" name="image">
-        <input type="number" name="price" placeholder="Insert the cost of your item">
-        <input type="date" name="expiration_date">
+    <section class="insertMoney">
+    <form enctype="multipart/form-data" action="includes/DBInsert.inc.php" method="post">  
+        <input type="number" name="balance" placeholder="The amount your want to add">
         <button type="submit" name="submit">Submit</button>
     </form>
 </section>

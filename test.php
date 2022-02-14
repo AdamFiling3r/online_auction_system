@@ -1,4 +1,3 @@
 <?php
-$file = "test.txt";
-$f = fopen($file, "w");
-fputs($f, "hello world");
+
+print_r($_SERVER["REQUEST_URI"]);
