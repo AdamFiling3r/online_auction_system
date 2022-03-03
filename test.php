@@ -32,4 +32,4 @@ include_once("includes/function.inc.php");
     //     fputs($f, "hello");
     //     fclose($f);
     // }
-    mail("adam.filiger@gmail.com", "hello", "hello adam");
+    echo($_SERVER["REQUEST_URI"]);
