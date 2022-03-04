@@ -215,29 +215,21 @@ function userPage($conn)
     }
 }
 
-function fromDB($conn, $url)
+function fromDB($conn)
 {
 
-    $Uid = $_SESSION["id"];
 
     $stmt = mysqli_stmt_init($conn);
-    if ($url == "/templates.php") {
-        $sql = "SELECT * FROM offers WHERE Uid = ? ORDER BY created_at desc;";
-    } elseif ($url == "/allOffers.php") {
-        $sql = "SELECT * FROM offers ORDER BY created_at desc;";
-    }
+    $sql = "SELECT * FROM offers ORDER BY id desc;";
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: index.php?erorr=$url");
+        header("location: index.php?erorr=");
         exit();
     } else {
-        if ($url == "/templates.php") {
-            mysqli_stmt_bind_param($stmt, "s", $Uid);
-        }
         mysqli_stmt_execute($stmt);
         $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
         mysqli_stmt_close($stmt);
         // print_r($result);
-        return $result;
+        $_SESSION["result"] = $result;
     }
 }
 
@@ -260,7 +252,7 @@ function intoDB($conn, $balance, $url)
     }
 }
 
-function bidTo($conn, $offer, $user, $amount){
+function bidTo($conn, $offer, $user, $bid){
     $stmt = mysqli_stmt_init($conn);
     $sql = "UPDATE offers SET price = price + ? WHERE id = ?;";
     if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -268,7 +260,7 @@ function bidTo($conn, $offer, $user, $amount){
         echo("stmt faild");
         exit();
     }else{
-        mysqli_stmt_bind_param($stmt, "ii", $amount, $offer);
+        mysqli_stmt_bind_param($stmt, "ii", $bid, $offer);
         mysqli_stmt_execute($stmt);
         echo("greate success");
     }
@@ -278,7 +270,7 @@ function bidTo($conn, $offer, $user, $amount){
         echo("stmt failed");
         exit();
     }else{
-        mysqli_stmt_bind_param($stmt, "iii", $user, $offer, $amount);
+        mysqli_stmt_bind_param($stmt, "iii", $user, $offer, $bid);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
 

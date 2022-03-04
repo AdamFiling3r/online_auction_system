@@ -6,6 +6,6 @@ include_once("connect.php");
 // $url = $_GET["url"];
 $url = $_SERVER["REQUEST_URI"];
 
-$result = fromDB($conn, $url);
+fromDB($conn);
 
 

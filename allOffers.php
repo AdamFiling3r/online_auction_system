@@ -27,7 +27,7 @@ include_once "navbar.php";
     //         include_once "includes/template_card.inc.php";
     //     }
     // }
-    for ($y = 0; $y < sizeof($result); $y++) {
+    for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
         include("includes/template_card.inc.php");
     }
     ?>
