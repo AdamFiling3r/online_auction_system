@@ -32,4 +32,22 @@ include_once("includes/function.inc.php");
     //     fputs($f, "hello");
     //     fclose($f);
     // }
-    echo($_SERVER["REQUEST_URI"]);
+function searchArray($type, $id){
+    $offers = array();
+        switch($type){
+            case 1:
+                for($i = 0; $i < sizeof($_SESSION["result"]); $i++){
+                    if($_SESSION["result"][$i][4] === $id){
+                        array_push($offers, $_SESSION["result"][$i]);
+                    }
+                }
+            case 2:
+                for($i = 0; $i < sizeof($_SESSION["result"]); $i++){
+                    if($_SESSION["result"][$i][0] === $id){
+                        array_push($offers, $_SESSION["result"][$i]);
+                    }
+                }
+        }
+    return $offers;
+}
+print_r(searchArray($_GET["type"], 3));

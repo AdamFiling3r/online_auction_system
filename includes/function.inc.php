@@ -179,15 +179,15 @@ function createNewPage($text, $conn, $img, $date, $price)
         header("location: ../creatingForm.php?erorr=stmtfailed");
         exit();
     } else {
-        if(!mysqli_stmt_bind_param($stmt, "sssss", $Uid, $descripPath, $imgPath, $date, $price)){
-        header("location: ../creatingForm.php?erorr=bind");
-        exit();
+        if (!mysqli_stmt_bind_param($stmt, "sssss", $Uid, $descripPath, $imgPath, $date, $price)) {
+            header("location: ../creatingForm.php?erorr=bind");
+            exit();
         }
-        if(!mysqli_stmt_execute($stmt)){
-        header("location: ../creatingForm.php?erorr=execute");
-        exit();
-        }       
-        
+        if (!mysqli_stmt_execute($stmt)) {
+            header("location: ../creatingForm.php?erorr=execute");
+            exit();
+        }
+
         mysqli_stmt_close($stmt);
 
         $f = fopen("../$descripPath", "a");
@@ -252,43 +252,53 @@ function intoDB($conn, $balance, $url)
     }
 }
 
-function bidTo($conn, $offer, $user, $bid){
+function bidTo($conn, $offer, $user, $bid)
+{
     $stmt = mysqli_stmt_init($conn);
-    $sql = "UPDATE offers SET price = price + ? WHERE id = ?;";
-    if(!mysqli_stmt_prepare($stmt, $sql)){
+    $sql = "UPDATE offers SET price = price + ? WHERE id = ?;
+    INSERT INTO bidding_log (Uid, offer_id, price) VALUES (?, ?, ?);";
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
         // header("location: ../index.php?erorr=STMTfailed");
-        echo("stmt faild");
+        echo ("stmt faild");
         exit();
-    }else{
-        mysqli_stmt_bind_param($stmt, "ii", $bid, $offer);
+    } else {
+        mysqli_stmt_bind_param($stmt, "iiiii", $bid, $offer, $user, $offer, $bid);
         mysqli_stmt_execute($stmt);
-        echo("greate success");
+        echo ("greate success, ");
     }
-    $sql2 = "INSERT INTO bidding_log (Uid, offer_id, price) VALUES (?, ?, ?);";
-    if(!mysqli_stmt_prepare($stmt, $sql2)){
-        // header("location: ../index.php?erorr=STMTfailed");
-        echo("stmt failed");
-        exit();
-    }else{
-        mysqli_stmt_bind_param($stmt, "iii", $user, $offer, $bid);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-
-    }
-    echo("great success");
 }
 
-function closedOffers($conn, $date){
+function closedOffers($conn, $date)
+{
     $stmt = mysqli_stmt_init($conn);
     $sql = "SELECT id FROM offers WHERE expiration_date = ?;";
-    if(mysqli_stmt_prepare($stmt, $sql)){
+    if (mysqli_stmt_prepare($stmt, $sql)) {
         mysqli_stmt_bind_param($stmt, "s", $date);
         mysqli_stmt_execute($stmt);
         $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
         mysqli_stmt_close($stmt);
-        return($result);
-    } else{
-        echo("stmtFailed");
+        return ($result);
+    } else {
+        echo ("stmtFailed");
         exit();
     }
+}
+
+function searchArray($type, $id){
+    $offers = array();
+        switch($type){
+            case 1:
+                for($i = 0; $i < sizeof($_SESSION["result"]); $i++){
+                    if($_SESSION["result"][$i][4] === $id){
+                        array_push($offers, $_SESSION["result"][$i]);
+                    }
+                }
+            case 2:
+                for($i = 0; $i < sizeof($_SESSION["result"]); $i++){
+                    if($_SESSION["result"][$i][0] === $id){
+                        array_push($offers, $_SESSION["result"][$i]);
+                    }
+                }
+        }
+    return $offers;
 }
