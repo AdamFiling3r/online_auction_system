@@ -238,9 +238,7 @@ function intoDB($conn, $balance, $url)
     $id = $_SESSION["id"];
 
     $stmt = mysqli_stmt_init($conn);
-    if ($url == "/includes/DBInsert.inc.php") {
         $sql = "UPDATE users SET balance = balance + ? WHERE id = ?;";
-    }
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../index.php?erorr=$url");
         exit();
