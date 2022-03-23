@@ -1,15 +1,5 @@
 <?php
 
-// $a1 = array(array("ahoj", "tati"), array("kolik", "tvoje"), array("ahoj", "mame"));
-
-
-// for ($i = 0; $i < sizeof($a1); $i++) {
-//     if (array_search("ahoj", $a1[$i]) !== false) {
-//         echo $i;
-//     }
-
-include_once("includes/connect.php");
-include_once("includes/function.inc.php");
 
 // aukce skonci --> zjistime kdo prihodil jako posledni --> vytvoříme order --> 
 // offers(sold) + orders(sent) = false --> aukce se odstrani ze stranky -->
@@ -17,37 +7,34 @@ include_once("includes/function.inc.php");
 // vlastnik aukce potvrdi odeslani --> offers(sold) + orders(sent) = true --> 
 // kupujicimu se odectou penize
 
-// $offer = $_GET["offer"];
-// $user = $_GET["user"] ;
-// $amount = $_GET["amount"];
+// function offerSent($Uid, $Oid, $price, $conn)
+// {
 
-// bidTo($conn, $offer, $user, $amount);
+//     $stmt = mysqli_stmt_init($conn);
+//     $sql = "UPDATE orders SET sent = 1 WHERE offer_id = ?;";
+//     // UPDATE orders SET sent = 1 WHERE offer_id = ?;
+//     if (!mysqli_stmt_prepare($stmt, $sql)) {
+//         echo (mysqli_stmt_error($stmt));
+//         echo ("stmtFailed");
+//         exit();
+//     } else {
+//         // mysqli_stmt_bind_param($stmt, "iiii", $Oid, $Oid, $price, $Uid);
+//         mysqli_stmt_bind_param($stmt, "i", $Oid);
+//         mysqli_stmt_execute($stmt);
+//         $sql2 = "UPDATE users SET balance = balance - ? WHERE id = ?;";
+//         if (!mysqli_stmt_prepare($stmt, $sql2)) {
+//             mysqli_stmt_error($stmt);
+//             exit();
+//         } else {
+//                 mysqli_stmt_bind_param($stmt, "ii", $price, $Uid);
+//                 mysqli_stmt_execute($stmt);
+//                 // $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
+//                 mysqli_stmt_close($stmt);
+//                 // print_r($result);
+//                 echo ("great success");
+//             }
+//         }
+//     }
 
 
-
-    // echo(date("d.m.Y"));
-    // if(date("i") == "42"){
-    //     $result = closedOffers($conn, date("Y.m.d"));
-    //     $f = fopen("includes/closedOffers.txt", "a");
-    //     fputs($f, "hello");
-    //     fclose($f);
-    // }
-function searchArray($type, $id){
-    $offers = array();
-        switch($type){
-            case 1:
-                for($i = 0; $i < sizeof($_SESSION["result"]); $i++){
-                    if($_SESSION["result"][$i][4] === $id){
-                        array_push($offers, $_SESSION["result"][$i]);
-                    }
-                }
-            case 2:
-                for($i = 0; $i < sizeof($_SESSION["result"]); $i++){
-                    if($_SESSION["result"][$i][0] === $id){
-                        array_push($offers, $_SESSION["result"][$i]);
-                    }
-                }
-        }
-    return $offers;
-}
-print_r(searchArray($_GET["type"], 3));
+echo(bin2hex(random_bytes(5)));

@@ -4,6 +4,7 @@ require_once "includes/connect.php";
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,8 +13,8 @@ require_once "includes/connect.php";
     <link rel="stylesheet" href="style.css">
     <title>Online Auction Systems</title>
 </head>
-<body>
 
+<body>
     <!-- Navbar -->
 
     <?php
@@ -21,7 +22,7 @@ require_once "includes/connect.php";
     ?>
 
     <!-- Showcase -->
-    
+
     <section class="bg-dark text-light pt-5 text-center text-sm-start">
         <div class="container">
             <div class="d-sm-flex align-items-center justify-content-between">
@@ -43,19 +44,19 @@ require_once "includes/connect.php";
         <div class="container">
             <div class="d-sm-flex align-items-center justify-content-between">
                 <div>
-                    <h3>Our system is powered by <span class="text-warning">crypto</span>. Because we believe that the crypto is the future.</h3> 
-                    <p class="lead">Full <a href="#" class="text-warning" style="text-decoration: none;">list</a> of supported tokens and coins</p> 
+                    <h3>Our system is powered by <span class="text-warning">crypto</span>. Because we believe that the crypto is the future.</h3>
+                    <p class="lead">Full <a href="#" class="text-warning" style="text-decoration: none;">list</a> of supported tokens and coins</p>
                 </div>
                 <img class="img-fluid w-25 d-none d-sm-block" src="img/crypto.svg" alt="crypto">
             </div>
-            
+
         </div>
     </section>
 
     <!--  -->
 
     <section>
-        
+
     </section>
 
 
@@ -64,4 +65,5 @@ require_once "includes/connect.php";
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 </body>
+
 </html>

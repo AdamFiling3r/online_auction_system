@@ -20,8 +20,8 @@ include_once "includes/connect.php";
     ?>
 
     <section class="insertMoney">
-    <form enctype="multipart/form-data" action="includes/DBInsert.inc.php" method="post">  
-        <input type="number" name="balance" placeholder="The amount your want to add">
+    <form enctype="multipart/form-data" action="includes/insertBalance.inc.php" method="post">  
+        <input type="integer" name="balance" placeholder="The amount your want to add">
         <button type="submit" name="submit">Submit</button>
     </form>
 </section>

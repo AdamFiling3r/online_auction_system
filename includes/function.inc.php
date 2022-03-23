@@ -2,10 +2,10 @@
 
 require_once "connect.php";
 
-function emptyInputRegister($name, $email, $username, $password, $rep_password)
+function emptyInputRegister($first_name, $last_name, $email, $username, $password, $rep_password)
 {
     $result = false;
-    if (empty($name) || empty($email) || empty($username) || empty($password) || empty($rep_password)) {
+    if (empty($first_name) || empty($last_name) || empty($email) || empty($username) || empty($password) || empty($rep_password)) {
         $result = true;
     } else {
         $result = false;
@@ -48,14 +48,14 @@ function passNotMach($password, $rep_password)
 
 function userExists($username, $email, $conn)
 {
+    $loginName = array($username, $email);
     $sql = "SELECT * FROM users WHERE username = ? OR email = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../register.php?error=stmtfailed");
         exit();
     }
-    mysqli_stmt_bind_param($stmt, "ss", $username, $email);
-    mysqli_stmt_execute($stmt);
+    mysqli_stmt_execute($stmt, $loginName);
 
     $resultData = mysqli_stmt_get_result($stmt);
 
@@ -69,28 +69,37 @@ function userExists($username, $email, $conn)
     mysqli_stmt_close($stmt);
 }
 
-function createUser($conn, $username, $email, $name, $password)
+function createUser($conn, $username, $email, $first_name, $last_name, $password)
 {
-    $sql = "INSERT INTO users (name, username, password, email) VALUES (?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../register.php?error=stmtfailed");
-        exit();
-    }
 
     $hass_password = password_hash($password, PASSWORD_DEFAULT);
     $user_descrip = "$username-descrip";
     $user_img = "$username-img";
+    $token = bin2hex(random_bytes(10));
 
-    mysqli_stmt_bind_param($stmt, "ssss", $name, $username, $hass_password, $email);
-    mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
+    insert(
+        $conn,
+        6,
+        "users",
+        "first_name",
+        "last_name",
+        "username",
+        "email",
+        "password",
+        "token",
+        $first_name,
+        $last_name,
+        $username,
+        $email,
+        $hass_password,
+        $token
+    );
 
     mkdir("../users/$username");
     mkdir("../users/$username/$user_descrip");
     mkdir("../users/$username/$user_img");
 
-    header("location: ../login.php?error=none");
+    header("location: ../login.php");
     exit();
 }
 
@@ -121,7 +130,7 @@ function loginUser($conn, $username, $password)
     $userExists = userExists($username, $username, $conn);
 
     if ($userExists === false) {
-        header("location: ../login.php?error=hovno");
+        header("location: ../login.php?error=nonExistingUser");
         exit();
     }
 
@@ -140,24 +149,11 @@ function loginUser($conn, $username, $password)
     }
 }
 
-function randomString()
-{
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $randomString = '';
-
-    for ($i = 0; $i < 6; $i++) {
-        $index = rand(0, strlen($characters) - 1);
-        $randomString .= $characters[$index];
-    }
-
-    return $randomString;
-}
-
 function createNewPage($text, $conn, $img, $date, $price)
 {
     $user = $_SESSION['username'];
     $Uid = $_SESSION["id"];
-    $randomStr = randomString();
+    $randomStr = bin2hex(random_bytes(3));
     $descripPath = "users/$user/$user-descrip/$randomStr.txt";
     $imgPath = "users/$user/$user-img/" . $img["name"];
 
@@ -171,132 +167,147 @@ function createNewPage($text, $conn, $img, $date, $price)
         header("location: ../creatingForm.php?erorr=fileNotUploaded");
         exit;
     }
-
-
-    $sql = "INSERT INTO offers (Uid, descrip, img, expiration_date, price) VALUES (?, ?, ?, ?, ?);";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../creatingForm.php?erorr=stmtfailed");
-        exit();
-    } else {
-        if (!mysqli_stmt_bind_param($stmt, "sssss", $Uid, $descripPath, $imgPath, $date, $price)) {
-            header("location: ../creatingForm.php?erorr=bind");
-            exit();
-        }
-        if (!mysqli_stmt_execute($stmt)) {
-            header("location: ../creatingForm.php?erorr=execute");
-            exit();
-        }
-
-        mysqli_stmt_close($stmt);
-
+    insert(
+        $conn,
+        5,
+        "offers",
+        "Uid",
+        "descrip",
+        "img",
+        "expiration_date",
+        "price",
+        $Uid,
+        $descripPath,
+        $imgPath,
+        $date,
+        $price
+    );
         $f = fopen("../$descripPath", "a");
         fputs($f, $text);
         fclose($f);
-    }
+
 }
 
-
-function userPage($conn)
+//$type defines if you want to search the array by user(case 1) or by offer(case 2)
+//$id defines the id of either a user or specific offer
+function searchArray($type, $id)
 {
-
-    $Uid = $_SESSION["id"];
-    $sql = "SELECT descrip, img FROM offers WHERE Uid = ?;";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: index.php?erorr=penis");
-        exit();
-    } else {
-        mysqli_stmt_bind_param($stmt, "s", $Uid);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
-        mysqli_stmt_close($stmt);
-        return $result;
-    }
-}
-
-function fromDB($conn)
-{
-
-
-    $stmt = mysqli_stmt_init($conn);
-    $sql = "SELECT * FROM offers ORDER BY id desc;";
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: index.php?erorr=");
-        exit();
-    } else {
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
-        mysqli_stmt_close($stmt);
-        // print_r($result);
-        $_SESSION["result"] = $result;
-    }
-}
-
-function intoDB($conn, $balance, $url)
-{
-    $id = $_SESSION["id"];
-
-    $stmt = mysqli_stmt_init($conn);
-        $sql = "UPDATE users SET balance = balance + ? WHERE id = ?;";
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../index.php?erorr=$url");
-        exit();
-    } else {
-        mysqli_stmt_bind_param($stmt, "ii", $balance, $id);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-        header("location: ../index.php");
-    }
-}
-
-function bidTo($conn, $offer, $user, $bid)
-{
-    $stmt = mysqli_stmt_init($conn);
-    $sql = "UPDATE offers SET price = price + ? WHERE id = ?;
-    INSERT INTO bidding_log (Uid, offer_id, price) VALUES (?, ?, ?);";
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        // header("location: ../index.php?erorr=STMTfailed");
-        echo ("stmt faild");
-        exit();
-    } else {
-        mysqli_stmt_bind_param($stmt, "iiiii", $bid, $offer, $user, $offer, $bid);
-        mysqli_stmt_execute($stmt);
-        echo ("greate success, ");
-    }
-}
-
-function closedOffers($conn, $date)
-{
-    $stmt = mysqli_stmt_init($conn);
-    $sql = "SELECT id FROM offers WHERE expiration_date = ?;";
-    if (mysqli_stmt_prepare($stmt, $sql)) {
-        mysqli_stmt_bind_param($stmt, "s", $date);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
-        mysqli_stmt_close($stmt);
-        return ($result);
-    } else {
-        echo ("stmtFailed");
-        exit();
-    }
-}
-
-function searchArray($type, $id){
     $offers = array();
-        switch($type){
-            case 1:
-                for($i = 0; $i < sizeof($_SESSION["result"]); $i++){
-                    if($_SESSION["result"][$i][4] === $id){
-                        array_push($offers, $_SESSION["result"][$i]);
-                    }
+    switch ($type) {
+        case 1:
+            for ($i = 0; $i < sizeof($_SESSION["result"]); $i++) {
+                if ($_SESSION["result"][$i][4] == $id) {
+                    array_push($offers, $_SESSION["result"][$i]);
                 }
-            case 2:
-                for($i = 0; $i < sizeof($_SESSION["result"]); $i++){
-                    if($_SESSION["result"][$i][0] === $id){
-                        array_push($offers, $_SESSION["result"][$i]);
-                    }
+            }
+        case 2:
+            for ($i = 0; $i < sizeof($_SESSION["result"]); $i++) {
+                if ($_SESSION["result"][$i][0] == $id) {
+                    array_push($offers, $_SESSION["result"][$i]);
                 }
-        }
+            }
+    }
     return $offers;
+}
+
+
+//$conn is predefined 
+//$numOfParams is a number representing the number of paramenters you want to insert
+//$tableName is the name of the table you want to insert into
+//The first half of the optional parameters will define the COLUMNS you want to insert into
+//The second half of the optional paramenters will define the VALUES you want to insert
+function insert($conn, $numOfParams, $tableName)
+{
+    $stmt = mysqli_stmt_init($conn);
+    $columns = "(";
+    $values = array();
+    $numOfValues = "(";
+    $number = func_num_args() - ($numOfParams + 1);
+    echo ($number . ", ");
+    for ($n = 3; $n < func_num_args(); $n++) {
+        echo ($n . ", ");
+        if ($n <= $number) {
+            if ($n !== $number) {
+                $columns .= func_get_arg($n) . ", ";
+            } else {
+                $columns .= func_get_arg($n);
+            }
+        } else {
+            array_push($values, func_get_arg($n));
+            if ($n !== func_num_args() - 1) {
+                $numOfValues .= "?, ";
+            } else {
+                $numOfValues .= "?";
+            }
+        }
+    }
+    $columns .= ")";
+    $numOfValues .= ")";
+    $sql = "INSERT INTO $tableName $columns VALUES $numOfValues;";
+    echo ($sql);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        exit("stmtFailed");
+    } else {
+        if (mysqli_stmt_execute($stmt, $values)) {
+            mysqli_stmt_close($stmt);
+            echo ("great success");
+        } else {
+            exit("execFailed");
+        }
+    }
+}
+
+//$setCol specifies the column that you want to set the new value
+//$set is the new value you want to set
+//$column specifies the column by which you want to search
+//$id is the id by which you want to search
+function update($conn, $tableName, $setCol, $set, $column, $id, $url)
+{
+    $stmt = mysqli_stmt_init($conn);
+    $sql = "UPDATE $tableName SET $setCol = $set WHERE $column = $id;";
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: $url.php?erorr=stmtFailed");
+    } else {
+        if (mysqli_stmt_execute($stmt)) {
+            mysqli_stmt_close($stmt);
+        } else {
+            header("location: $url.php?erorr=execFailed");
+        }
+    }
+}
+
+//$column specifies the column by which you want to search the database
+//$id is the id you want to search in the column
+function selectAllWhere($conn, $tableName, $column, $id)
+{
+    $stmt = mysqli_stmt_init($conn);
+    $sql = "SELECT * FROM $tableName WHERE $column = $id;";
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        exit("stmtFailed");
+    } else {
+        if (mysqli_stmt_execute($stmt)) {
+            $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
+            mysqli_stmt_close($stmt);
+            return $result;
+        } else {
+            exit("execFailed");
+        }
+    }
+}
+
+function selectAll($conn, $tableName)
+{
+    $stmt = mysqli_stmt_init($conn);
+    $sql = "SELECT * FROM $tableName;";
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        exit("stmtFailed");
+    } else {
+        if (mysqli_stmt_execute($stmt)) {
+            $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
+            mysqli_stmt_close($stmt);
+            $_SESSION["result"] = $result;
+        } else {
+            exit("execFailed");
+        }
+    }
 }

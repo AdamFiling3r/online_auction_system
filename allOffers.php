@@ -1,6 +1,5 @@
 <?php
 require_once "includes/connect.php";
-require_once "includes/DBPull.inc.php";
 
 ?>
 <!DOCTYPE html>
@@ -22,13 +21,10 @@ include_once "navbar.php";
 
 <body>
     <?php
-    // for($y = 0; $y < sizeof($descrip_path); $y++){
-    //     for($i = 0; $i < sizeof($descrip_path); $i++){
-    //         include_once "includes/template_card.inc.php";
-    //     }
-    // }
     for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
+        if($_SESSION["result"][$y][6] == 0){ 
         include("includes/template_card.inc.php");
+        }
     }
     ?>
 

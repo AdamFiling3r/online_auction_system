@@ -35,8 +35,13 @@ require_once "includes/connect.php";
                     <p class="text-white-50 mb-5">Please fill out the registration form!</p>
                     
                     <div class="form-outline form-white mb-4">
-                        <input type="text" name="name" class="form-control form-control-lg" />
-                        <label class="form-label" for="name">Full name</label>
+                        <input type="text" name="first_name" class="form-control form-control-lg" />
+                        <label class="form-label" for="first_name">First name</label>
+                      </div>
+
+                    <div class="form-outline form-white mb-4">
+                        <input type="text" name="last_name" class="form-control form-control-lg" />
+                        <label class="form-label" for="last_name">Last name</label>
                       </div>
 
                     <div class="form-outline form-white mb-4">

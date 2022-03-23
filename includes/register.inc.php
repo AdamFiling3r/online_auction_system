@@ -2,7 +2,8 @@
 
 
 if(isset($_POST["submit"])){
-    $name = $_POST['name'];
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
     $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -11,7 +12,7 @@ if(isset($_POST["submit"])){
     require_once 'connect.php';
     require_once 'function.inc.php';
 
-    if(emptyInputRegister($name, $email, $username, $password, $rep_password) !== false){
+    if(emptyInputRegister($first_name, $last_name, $email, $username, $password, $rep_password) !== false){
         header("location: ../register.php?error=emptyinput");
         exit();
     }
@@ -32,7 +33,7 @@ if(isset($_POST["submit"])){
         exit();
     }
 
-    createUser($conn, $username, $email, $name, $password);
+    createUser($conn, $username, $email, $first_name, $last_name, $password);
     
     
 }else{

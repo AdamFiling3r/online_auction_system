@@ -6,6 +6,6 @@ include_once("connect.php");
 // $url = $_GET["url"];
 $url = $_SERVER["REQUEST_URI"];
 
-fromDB($conn);
+$result = selectAllWhere($conn, "offers", "Uid", $_SESSION["id"]);
 
 

@@ -2,7 +2,6 @@
 require_once "connect.php";
 require_once "function.inc.php";
 
-$result = userPage($conn);
 $descrip_path = $result;
 // for($i = 0; $i < sizeof($descrip_path); $i++){
 //     echo($descrip_path[$i][0] . ", ");
