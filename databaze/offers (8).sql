@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Pon 14. úno 2022, 18:36
+-- Vytvořeno: Čtv 24. bře 2022, 09:33
 -- Verze serveru: 10.4.22-MariaDB
--- Verze PHP: 8.0.13
+-- Verze PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,32 +28,27 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `offers` (
-  `Uid` int(11) NOT NULL,
-  `descrip` varchar(148) NOT NULL,
+  `id` int(100) NOT NULL,
+  `Uid` int(100) NOT NULL,
   `img` varchar(225) NOT NULL,
-  `sold` tinyint(1) DEFAULT NULL,
-  `id` int(11) NOT NULL,
-  `price` int(11) NOT NULL,
-  `expiration_date` date DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `descrip` varchar(225) NOT NULL,
+  `price` int(100) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
+  `sold` tinyint(1) NOT NULL DEFAULT 0,
+  `expiration_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Vypisuji data pro tabulku `offers`
 --
 
-INSERT INTO `offers` (`Uid`, `descrip`, `img`, `sold`, `id`, `price`, `expiration_date`, `created_at`) VALUES
-(1, 'users/iveta/iveta-descrip/WwJM51.txt', 'users/iveta/iveta-img/superman.jpg', NULL, 1, 0, NULL, '2022-02-14 09:42:24'),
-(1, 'users/iveta/iveta-descrip/3XLyjN.txt', 'users/iveta/iveta-img/svíčková.jpg', NULL, 2, 0, NULL, '2022-02-14 09:42:24'),
-(1, 'users/iveta/iveta-descrip/rXaSnV.txt', 'users/iveta/iveta-img/spring rolls.jpg', NULL, 3, 0, NULL, '2022-02-14 09:42:24'),
-(1, 'users/iveta/iveta-descrip/WwJM51.txt', 'users/iveta/iveta-img/superman.jpg', NULL, 4, 0, NULL, '2022-02-14 09:42:24'),
-(1, 'users/iveta/iveta-descrip/3XLyjN.txt', 'users/iveta/iveta-img/svíčková.jpg', NULL, 5, 0, NULL, '2022-02-14 09:42:24'),
-(1, 'users/iveta/iveta-descrip/rXaSnV.txt', 'users/iveta/iveta-img/spring rolls.jpg', NULL, 6, 0, NULL, '2022-02-14 09:42:24'),
-(3, 'users/filip/filip-descrip/ufS6Ax.txt', 'users/filip/filip-img/fuckof.jpg', NULL, 7, 0, NULL, '2022-02-14 09:42:24'),
-(3, 'users/filip/filip-descrip/GkMKxT.txt', 'users/filip/filip-img/muj_baracek.png', NULL, 8, 0, NULL, '2022-02-14 09:42:24'),
-(3, 'users/filip/filip-descrip/ETr0kz.txt', 'users/filip/filip-img/coloseum.jpg', NULL, 9, 123, '2022-02-12', '2022-02-14 09:42:24'),
-(3, 'users/filip/filip-descrip/z2OQAW.txt', 'users/filip/filip-img/fuckof.jpg', NULL, 10, 45000, '2022-02-25', '2022-02-14 09:44:41'),
-(3, 'users/filip/filip-descrip/qfB68B.txt', 'users/filip/filip-img/hamina.jpg', NULL, 11, 900, '2022-02-28', '2022-02-14 13:28:29');
+INSERT INTO `offers` (`id`, `Uid`, `img`, `descrip`, `price`, `created_at`, `sold`, `expiration_date`) VALUES
+(1, 1, 'users/panH/panH-img/muj_baracek.png', 'users/panH/panH-descrip/11cd46.txt', 12345, '2022-03-16 23:10:37', 0, '2022-03-16'),
+(2, 5, 'users/debil/debil-img/mikey.jpg', 'users/debil/debil-descrip/a64c35.txt', 200, '2022-03-21 12:56:55', 0, '2022-03-27'),
+(3, 5, 'users/debil/debil-img/273541236_656741535476292_6884670821452460512_n.jpg', 'users/debil/debil-descrip/6d8889.txt', 456, '2022-03-21 21:09:22', 0, '2022-03-22'),
+(4, 5, 'users/debil/debil-img/spring rolls.jpg', 'users/debil/debil-descrip/79d921.txt', 290, '2022-03-21 21:17:01', 0, '2022-03-22'),
+(5, 5, 'users/debil/debil-img/stažený soubor.jpg', 'users/debil/debil-descrip/05ffc1.txt', 340, '2022-03-21 21:19:09', 0, '2022-03-25'),
+(6, 5, 'users/debil/debil-img/superman.jpg', 'users/debil/debil-descrip/aba5eb.txt', 345, '2022-03-22 19:08:31', 0, '2022-03-24');
 
 --
 -- Indexy pro exportované tabulky
@@ -63,7 +58,8 @@ INSERT INTO `offers` (`Uid`, `descrip`, `img`, `sold`, `id`, `price`, `expiratio
 -- Indexy pro tabulku `offers`
 --
 ALTER TABLE `offers`
-  ADD UNIQUE KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `offerUid_userId` (`Uid`);
 
 --
 -- AUTO_INCREMENT pro tabulky
@@ -73,7 +69,17 @@ ALTER TABLE `offers`
 -- AUTO_INCREMENT pro tabulku `offers`
 --
 ALTER TABLE `offers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Omezení pro exportované tabulky
+--
+
+--
+-- Omezení pro tabulku `offers`
+--
+ALTER TABLE `offers`
+  ADD CONSTRAINT `offers_ibfk_1` FOREIGN KEY (`Uid`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
