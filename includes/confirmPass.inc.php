@@ -11,6 +11,6 @@ header("location: ../auction.php?offer_id=$Oid&success");
 exit();
 
 }else{
-header("location: ../auction.php?offer_id=$Oid&failed");
+header("location: ../auction.php?offer_id=$OidR&failed");
 exit();
 }
