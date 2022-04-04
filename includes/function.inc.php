@@ -46,6 +46,41 @@ function passNotMach($password, $rep_password)
     return $result;
 }
 
+
+function passWrongFormat($pass)
+{
+    $result = false;
+    if (!preg_match("/\d/", $pass)) {
+        $result = true;
+    }
+    if (!preg_match("/[A-Z]/", $pass)) {
+        $result = true;
+    }
+    if (!preg_match("/[a-z]/", $pass)) {
+        $result = true;
+    }
+    if (!preg_match("/\W/", $pass)) {
+        $result = true;
+    }
+    if (preg_match("/\s/", $pass)) {
+        $result = true;
+    }
+    return $result;
+
+}
+function passwShortLong($pass)
+{
+    $result = false;
+    if (strlen($pass) < 8 || strlen($pass) > 16) {
+        $result = true;
+    }else{
+        $result = false;
+    }
+    return $result;
+
+}
+
+
 function userExists($username, $email, $conn)
 {
     $loginName = array($username, $email);
@@ -245,13 +280,11 @@ function insert($conn, $numOfParams, $tableName)
     $columns .= ")";
     $numOfValues .= ")";
     $sql = "INSERT INTO $tableName $columns VALUES $numOfValues;";
-    echo ($sql);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         exit("stmtFailed");
     } else {
         if (mysqli_stmt_execute($stmt, $values)) {
             mysqli_stmt_close($stmt);
-            echo ("great success");
         } else {
             exit("execFailed");
         }
@@ -267,12 +300,13 @@ function update($conn, $tableName, $setCol, $set, $column, $id, $url)
     $stmt = mysqli_stmt_init($conn);
     $sql = "UPDATE $tableName SET $setCol = $set WHERE $column= $id;";
     if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: $url.php?erorr=stmtFailed");
+        exit("prepareFailed");
     } else {
         if (mysqli_stmt_execute($stmt)) {
             mysqli_stmt_close($stmt);
+            exit("execFailed");
         } else {
-            header("location: $url.php?erorr=execFailed");
+            exit("execSucces");
         }
     }
 }

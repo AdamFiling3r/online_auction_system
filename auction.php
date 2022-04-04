@@ -29,7 +29,7 @@ include_once("navbar.php");
                 <div>
                     <h1><?php echo fread(fopen($auction[0][3], "r"), filesize($auction[0][3])); ?></h1>
                     <p class="lead my-4">
-                        <?php echo date($auction[0][7]) ?>
+                        <?php echo date($auction[0][8]) ?>
                     </p>
                     <p class="lead my-4">
                         <?php echo $auction[0][4] ?>

@@ -7,12 +7,13 @@ if(isset($_POST['submit'])){
     require_once 'connect.php';
     require_once 'function.inc.php';
 
-    if(emptyInputLogin($username, $password) !== false){
-      header("location ../login.php?error=emptylogin");
+    if(emptyInputLogin($username, $password) == true){
+      header("location: ../login.php?error=emptylogin");
       exit();
-    }
+    }else{
     
     loginUser($conn, $username, $password);
+    }
 
 }else{
   header("location: ../login.php");

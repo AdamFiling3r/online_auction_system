@@ -59,4 +59,8 @@ require_once "includes/connect.php";
 // }else{
 // echo("big failure");
 // }
-print_r(selectAllWhere($conn, "orders", "offer_id", $_SESSION["result"][0][0])[0]);
+if(!passWrongFormat("HelloWorld")){
+    echo("good");
+}else{
+    echo("bad");
+}
