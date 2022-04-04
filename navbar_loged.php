@@ -11,5 +11,15 @@
     <a href="insertMoney.php" class="nav-link text-success">Insert</a>
 </li>
 <li class="nav-item">
-    <a href="templates.php" class="nav-link text-success"> <?php echo htmlspecialchars($_SESSION["username"]) ?></a>
+<div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    My profile
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="templates.php?template_id=1">My Auctions</a></li>
+    <li><a class="dropdown-item" href="templates.php?template_id=2">My Bids</a></li>
+    <li><a class="dropdown-item" href="templates.php?template_id=3">My purchases</a></li>
+    <li><a class="dropdown-item" href="templates.php?template_id=4">To send</a></li>
+  </ul>
+</div>
 </li>

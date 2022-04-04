@@ -11,5 +11,5 @@ if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 } else {
     session_start();
-    selectAll($conn, "offers");
+    $_SESSION["result"] = selectAll($conn, "offers");
 }

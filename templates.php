@@ -1,5 +1,6 @@
 <?php
 require_once "includes/connect.php";
+require_once "includes/function.inc.php";
 
 ?>
 <!DOCTYPE html>
@@ -21,20 +22,47 @@ include_once "navbar.php";
 
 <body>
     <?php
-    // for($y = 0; $y < sizeof($descrip_path); $y++){
-    //     for($i = 0; $i < sizeof($descrip_path); $i++){
-    //         include_once "includes/template_card.inc.php";
-    //     }
-    // }
-    for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
-        if ($_SESSION["result"][$y][1] == $_SESSION["id"]) {
-            if ($_SESSION["result"][$y][6] == 0) {
-                include("includes/template_card.inc.php");
+    switch($_GET["template_id"]){
+        case 1:
+            echo("<h5>My auctions</h5>");
+            for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
+                if ($_SESSION["result"][$y][1] == $_SESSION["id"]) {
+                        include("includes/template_card.inc.php");
+                }
             }
-        }
+            break;
+        case 2:
+            echo("<h5>My bids</h5>");
+            for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
+                if ($_SESSION["result"][$y][6] == $_SESSION["id"]) {
+                    if ($_SESSION["result"][$y][7] == 0) {
+                        include("includes/template_card.inc.php");
+                    }
+                }
+            }
+            break;
+        case 3:
+            echo("<h5>My purchases</h5>");
+            for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
+                if ($_SESSION["result"][$y][6] == $_SESSION["id"]) {
+                    if ($_SESSION["result"][$y][7] == 1) {
+                        include("includes/template_card.inc.php");
+                    }
+                }
+            }
+            break;
+        case 4:
+            echo("<h5>To send</h5>");
+            for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
+                if ($_SESSION["result"][$y][1] == $_SESSION["id"]) {
+                    if (($_SESSION["result"][$y][7] == 1) && (selectAllWhere($conn, "orders", "offer_id", $_SESSION["result"][$y][0])[0][4] == 0)) {
+                        include("includes/template_card.inc.php");
+                    }
+                }
+            }
+            break;
     }
     ?>
-
 </body>
 
 </html>

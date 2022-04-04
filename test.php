@@ -36,5 +36,27 @@
 //         }
 //     }
 
+require_once "includes/function.inc.php";
+require_once "includes/connect.php";
+// require_once("PHPMailer/vendor/autoload.php");
+// use PHPMailer\PHPMailer\PHPMailer;
+// $mail = new PHPMailer();
+// $mail->isSMTP();
+// $mail->SMTPAuth = true;
+// $mail->SMTPSecure = "tls";
+// $mail->Host = "smtp.gmail.com";
+// $mail->Port = 587;
+// $mail->isHTML();
+// $mail->Username = "adam.filinger@gmail.com";
+// $mail->Password = "DRzoiberk007";
+// $mail-> setFrom("adam.filinger@gmail.com");
+// $mail->Subject = "Hello";
+// $mail->Body = "Test mail";
+// $mail->addAddress("eidamfilin@gmail.com");
 
-echo(bin2hex(random_bytes(5)));
+// if($mail->send()){
+// echo("great success");
+// }else{
+// echo("big failure");
+// }
+print_r(selectAllWhere($conn, "orders", "offer_id", $_SESSION["result"][0][0])[0]);

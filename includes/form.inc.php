@@ -8,13 +8,15 @@ if (isset($_POST['submit'])) {
   require_once 'connect.php';
   require_once 'function.inc.php';
 
-  if (emptyInput($text) !== false) {
-    header("location ../form.php?error=emptytext");
+  if (emptyInput($text)) {
+    header("location: ../creatingForm.php?error=emptytext");
     exit();
-  }
+  }else{
 
   createNewPage($text, $conn, $img, $date, $price);
     header("location: ../index.php");
+    exit();
+  }
 } else {
   header("location: ../form.php");
   exit();

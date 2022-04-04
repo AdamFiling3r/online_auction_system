@@ -1,5 +1,6 @@
 <?php
 include_once "includes/function.inc.php";
+include_once "includes/connect.php";
 $auction = searchArray(2, $_GET["offer_id"]);
 ?>
 <!DOCTYPE html>
@@ -33,12 +34,26 @@ include_once("navbar.php");
                     <p class="lead my-4">
                         <?php echo $auction[0][4] ?>
                     </p>
-                    <button class="btn btn-success btn-lg my-4"><a href="confirmPass.php?offer_id=<?php echo($auction[0][0]) ?>">Confirm password</a></button>
                 </div>
                 <img class="img-fluid d-none d-sm-block" style="width: 20%; height: 20%;" src="<?php echo $auction[0][2]; ?>" alt="trade">
             </div>
         </div>
     </section>
+    <?php
+    if($auction[0][7] != 1){
+        require_once("includes/confirmPassForm.php");
+    }else{
+        if(selectAllWhere($conn, "orders", "offer_id", $auction[0][0])[0][4] == 0 ){
+            if($auction[0][1] == $_SESSION["id"]){
+                echo('<button class="btn btn-success btn-lg my-4"> <a href="includes/send.php?offer_id='. $auction[0][0] .'" class="text-dark" style="text-decoration: none;">Send</a></button>');
+            }else{
+                require_once("includes/waitingMess.php");
+            }
+        }else{
+            require_once("includes/soldMess.php");
+        }
+    }
+    ?>
 
 </body>
 

@@ -22,7 +22,7 @@ include_once "navbar.php";
 <body>
     <?php
     for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
-        if($_SESSION["result"][$y][6] == 0){ 
+        if($_SESSION["result"][$y][7] == 0){ 
         include("includes/template_card.inc.php");
         }
     }

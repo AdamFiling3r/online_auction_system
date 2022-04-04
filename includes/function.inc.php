@@ -144,6 +144,7 @@ function loginUser($conn, $username, $password)
         session_start();
         $_SESSION = $userExists;
         $_SESSION["loggedin"] = true;
+        $_SESSION["bids"] = selectAllWhere($conn, "bidding_log", "Uid", $_SESSION["id"]);
         header("location: ../index.php");
         exit();
     }
@@ -264,7 +265,7 @@ function insert($conn, $numOfParams, $tableName)
 function update($conn, $tableName, $setCol, $set, $column, $id, $url)
 {
     $stmt = mysqli_stmt_init($conn);
-    $sql = "UPDATE $tableName SET $setCol = $set WHERE $column = $id;";
+    $sql = "UPDATE $tableName SET $setCol = $set WHERE $column= $id;";
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: $url.php?erorr=stmtFailed");
     } else {
@@ -281,7 +282,7 @@ function update($conn, $tableName, $setCol, $set, $column, $id, $url)
 function selectAllWhere($conn, $tableName, $column, $id)
 {
     $stmt = mysqli_stmt_init($conn);
-    $sql = "SELECT * FROM $tableName WHERE $column = $id;";
+    $sql = "SELECT * FROM $tableName WHERE $column= $id;";
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         exit("stmtFailed");
     } else {
@@ -305,7 +306,7 @@ function selectAll($conn, $tableName)
         if (mysqli_stmt_execute($stmt)) {
             $result = mysqli_fetch_all(mysqli_stmt_get_result($stmt));
             mysqli_stmt_close($stmt);
-            $_SESSION["result"] = $result;
+            return $result;
         } else {
             exit("execFailed");
         }
