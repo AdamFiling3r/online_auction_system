@@ -2,10 +2,10 @@
     <a href="logout.php" class="nav-link text-success">Logout</a>
 </li>
 <li class="nav-item">
-    <a href="allOffers.php" class="nav-link text-success">Main</a>
+    <a href="allOffers.php" class="nav-link text-success">Auction list</a>
 </li>
 <li class="nav-item">
-    <a href="creatingForm.php" class="nav-link text-success">Form</a>
+    <a href="creatingForm.php" class="nav-link text-success">Create an auction</a>
 </li>
 <li class="nav-item">
     <a href="insertMoney.php" class="nav-link text-success">Insert</a>

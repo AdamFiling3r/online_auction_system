@@ -31,7 +31,7 @@ require_once "includes/connect.php";
                     <p class="lead my-4">
                         Trade among other people on a website. Buy or sell items you do not need anymore. Register today and start trading.
                     </p>
-                    <button class="btn btn-success btn-lg my-4"> <a href="register.html" class="text-dark" style="text-decoration: none;">Register</a></button>
+                    <button class="btn btn-success btn-lg my-4"> <a href="register.php" class="text-dark" style="text-decoration: none;">Register</a></button>
                 </div>
                 <img class="img-fluid w-50 d-none d-sm-block" src="img/showcase.svg" alt="trade">
             </div>
@@ -53,11 +53,15 @@ require_once "includes/connect.php";
         </div>
     </section>
 
-    <!--  -->
+    <!-- Footer -->
 
-    <section>
-
-    </section>
+    <footer class="p-5 bg-dark text-white text-center position-relative">
+    <div class="container">
+        <p class="lead">
+            Copyright &copy; 2022 Online Auction Systems
+        </p>
+    </div>
+    </footer>
 
 
 
