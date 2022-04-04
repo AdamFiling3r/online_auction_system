@@ -304,9 +304,9 @@ function update($conn, $tableName, $setCol, $set, $column, $id, $url)
     } else {
         if (mysqli_stmt_execute($stmt)) {
             mysqli_stmt_close($stmt);
-            exit("execFailed");
         } else {
-            exit("execSucces");
+            header("location: $url?execFailed");
+            exit("execFailed");
         }
     }
 }
