@@ -17,7 +17,7 @@ $auction = searchArray(2, $_GET["offer_id"]);
     <title>Auction</title>
 </head>
 
-<body>
+<body class="bg-dark">
 
 <?php
 include_once("navbar.php");
@@ -68,6 +68,10 @@ include_once("navbar.php");
         }
     }
     ?>
+
+<?php
+include_once("footer.php");
+?>
 
 </body>
 

@@ -11,10 +11,11 @@ require_once "includes/connect.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <title>Online Auction Systems</title>
 </head>
 
-<body>
+<body class="bg-dark">
     <!-- Navbar -->
 
     <?php
@@ -52,21 +53,14 @@ require_once "includes/connect.php";
 
         </div>
     </section>
-
-    <!-- Footer -->
-
-    <footer class="p-5 bg-dark text-white text-center position-relative">
-    <div class="container">
-        <p class="lead">
-            Copyright &copy; 2022 Online Auction Systems
-        </p>
-    </div>
-    </footer>
+    <?php
+    include_once("footer.php");
+    ?>
 
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
 
 </body>
 

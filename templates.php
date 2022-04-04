@@ -24,7 +24,13 @@ include_once "navbar.php";
     <?php
     switch($_GET["template_id"]){
         case 1:
-            echo("<h5>My auctions</h5>");
+            echo ( "<section class='p-5 bg-dark text-white text-center position-relative'>
+            <div class='container'>
+                <h2>
+                    My Auctions
+                </h2>
+            </div>
+            </section>");
             for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
                 if ($_SESSION["result"][$y][1] == $_SESSION["id"]) {
                         include("includes/template_card.inc.php");
@@ -32,7 +38,13 @@ include_once "navbar.php";
             }
             break;
         case 2:
-            echo("<h5>My bids</h5>");
+            echo ( "<section class='p-5 bg-dark text-white text-center position-relative'>
+            <div class='container'>
+                <h2>
+                    My Bids
+                </h2>
+            </div>
+            </section>");
             for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
                 if ($_SESSION["result"][$y][6] == $_SESSION["id"]) {
                     if ($_SESSION["result"][$y][7] == 0) {
@@ -42,7 +54,13 @@ include_once "navbar.php";
             }
             break;
         case 3:
-            echo("<h5>My purchases</h5>");
+            echo ( "<section class='p-5 bg-dark text-white text-center position-relative'>
+            <div class='container'>
+                <h2>
+                    My Purchases
+                </h2>
+            </div>
+            </section>");
             for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
                 if ($_SESSION["result"][$y][6] == $_SESSION["id"]) {
                     if ($_SESSION["result"][$y][7] == 1) {
@@ -52,7 +70,13 @@ include_once "navbar.php";
             }
             break;
         case 4:
-            echo("<h5>To send</h5>");
+            echo ( "<section class='p-5 bg-dark text-white text-center position-relative'>
+            <div class='container'>
+                <h2>
+                    To Send
+                </h2>
+            </div>
+            </section>");
             for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
                 if ($_SESSION["result"][$y][1] == $_SESSION["id"]) {
                     if (($_SESSION["result"][$y][7] == 1) && (selectAllWhere($conn, "orders", "offer_id", $_SESSION["result"][$y][0])[0][4] == 0)) {
@@ -62,6 +86,10 @@ include_once "navbar.php";
             }
             break;
     }
+    ?>
+
+<?php
+    include_once("footer.php");
     ?>
 </body>
 
