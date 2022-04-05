@@ -42,7 +42,7 @@
                           </label>
                         </div>
                         <div class="form-outline form-white mb-4">
-                          <input type="file" name="image" class="form-control form-control-lg" />
+                          <input type="file" name="image" class="form-control form-control-lg" accept="image/x-png,image/gif,image/jpeg"/>
                           <label class="form-label" for="image">
                             Picture file
                           </label>
