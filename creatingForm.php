@@ -12,6 +12,10 @@
       <title>
         Form
       </title>
+      <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
     </head>
     
     <body class="bg-dark">
@@ -38,13 +42,13 @@
                           </label>
                         </div>
                         <div class="form-outline form-white mb-4">
-                          <input type="file" name="image" class="form-control form-control-lg" />
+                          <input type="file" name="image" class="form-control form-control-lg" accept="image/x-png,image/gif,image/jpeg"/>
                           <label class="form-label" for="image">
                             Picture file
                           </label>
                         </div>
                         <div class="form-outline form-white mb-4">
-                          <input type="number" name="price" class="form-control form-control-lg"
+                          <input type="number" min="0" oninput="validity.valid||(value='');" name="price" class="form-control form-control-lg"
                           />
                           <label class="form-label" for="price">
                             Price

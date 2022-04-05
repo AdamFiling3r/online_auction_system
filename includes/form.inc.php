@@ -9,7 +9,9 @@ if (isset($_POST['submit'])) {
   require_once 'function.inc.php';
 
   if (emptyInput($text)) {
-    header("location: ../creatingForm.php?error=emptytext");
+    array_push($_SESSION['errors'], 'emptyInputLogin');
+    header("location: ". $_SESSION["HTTP_REFERER"]);
+
     exit();
   }else{
 

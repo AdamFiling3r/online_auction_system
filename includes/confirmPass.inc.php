@@ -8,10 +8,11 @@ if (isset($_POST["submit"])) {
     $amount = $_POST["amount"] + searchArray(2, $Oid)[0][4];
 
     if ($_SESSION["balance"] - $amount < 0) {
-        header("location: ../allOffers.php?smallBalance");
+        array_push($_SESSION['errors'], 'smallBalance');
+        header("location: ". $_SESSION["HTTP_REFERER"]);
         exit();
     } else {
-
+        
 
         if (searchArray(2, $Oid)[0][1] != $_SESSION["id"]) {
             $passwordHass = selectAllWhere($conn, "users", "id", $_SESSION["id"]);

@@ -12,6 +12,10 @@ require_once "includes/connect.php";
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
     <title>Login</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 </head>
 <body class="bg-dark">
 
@@ -44,6 +48,26 @@ require_once "includes/connect.php";
               <div class="form-outline form-white mb-4">
                 <input type="password" name="password" class="form-control form-control-lg"/>
                 <label class="form-label" for="password">Password</label>
+              </div>
+
+              <div class="form-outline form-white mb-4">
+                <ul>
+                    
+                <?php
+                    if (in_array('emptyInputLogin', $_SESSION["errors"])) {
+                      echo "<li>Enter Username (Email) and Password</li>";
+                    }
+                    if (in_array('userNotExists', $_SESSION["errors"])) {
+                      echo "<li>This user doesn't exist.</li>";
+                    }
+                    if (in_array('wrongPassword', $_SESSION["errors"])) {
+                      echo "<li>Wrong password</li>";
+                    
+                    }
+                     
+                
+                ?>
+              </ul>
               </div>
 
               <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
