@@ -165,7 +165,8 @@ function loginUser($conn, $username, $password)
     $userExists = userExists($username, $username, $conn);
 
     if ($userExists === false) {
-        header("location: ../login_wrong_error.php");
+        array_push($_SESSION['errors'], 'userNotExists');
+        header("location: ". $_SERVER["HTTP_REFERER"]);
         exit();
     }
 
@@ -173,7 +174,8 @@ function loginUser($conn, $username, $password)
     $checkPass = password_verify($password, $password_hash);
 
     if ($checkPass === false) {
-        header("location: ../login.php?error=penis");
+        array_push($_SESSION['errors'], 'wrongPassword');
+        header("location: ". $_SERVER["HTTP_REFERER"]);
         exit();
     } else if ($checkPass === true) {
         session_start();
