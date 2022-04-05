@@ -1,4 +1,4 @@
-<section class="bg-dark text-light pt-5 text-center text-sm-start">
+<section class="bg-dark text-light pt-5 text-center text-sm-start border-bottom border-secondary">
         <div class="container">
             <div class="d-sm-flex align-items-center justify-content-between">
                 <div>
