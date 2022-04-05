@@ -37,13 +37,14 @@ require_once "includes/connect.php";
               <p class="text-white-50 mb-5">Please enter your email, username and password!</p>
 
               <div class="form-outline form-white mb-4">
-                <input type="username" name="username" class="form-control form-control-lg"/>
+                <input type="username" name="username" class="form-control form-control-lg" />
                 <label class="form-label" for="username">Username</label>
               </div>
 
               <div class="form-outline form-white mb-4">
-                <input type="password" name="password" class="form-control form-control-lg"/>
+                <input type="password" name="password" class="form-control form-control-lg" />
                 <label class="form-label" for="password">Password</label>
+                <p class="text-warning">You put wrong Username or Password, please try again.</p>
               </div>
 
               <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>

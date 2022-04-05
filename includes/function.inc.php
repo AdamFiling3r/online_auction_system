@@ -165,7 +165,7 @@ function loginUser($conn, $username, $password)
     $userExists = userExists($username, $username, $conn);
 
     if ($userExists === false) {
-        header("location: ../login.php?error=nonExistingUser");
+        header("location: ../login_wrong_error.php");
         exit();
     }
 
