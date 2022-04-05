@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 border-bottom border-warning">
   <div class="container">
     <a href="index.php" class="navbar-brand">Online Auction Systems</a>
 
