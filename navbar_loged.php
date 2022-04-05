@@ -8,7 +8,10 @@
     <li><a class="dropdown-item text-success" href="templates.php?template_id=2">My Bids</a></li>
     <li><a class="dropdown-item text-success" href="templates.php?template_id=3">My purchases</a></li>
     <li><a class="dropdown-item text-success" href="templates.php?template_id=4">To send</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item text-warning" href="#">User: <?php echo ($_SESSION["username"]); ?></a></li>
     <li><a class="dropdown-item text-warning" href="logout.php">Logout</a></li>
+    
   </ul>
 </div>
 </li>

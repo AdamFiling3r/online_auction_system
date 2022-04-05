@@ -1,10 +1,8 @@
-    <!-- Footer -->
-
-    <footer class="p-1 bg-dark text-white text-center fixed-bottom border-top border-success">
-    <div class="container">
-        <p class="lead m-1">
-            Copyright &copy; 2022 Online Auction Systems
-        </p>
+<!-- Footer -->
+<div class="my-5">
+  <footer class="text-center text-lg-start bg-dark fixed-bottom border-top border-success">
+    <div class="text-center text-white p-3">
+      © 2022 Copyright: Online Auction Systems
     </div>
-    </footer>
-    
+  </footer>
+</div>
