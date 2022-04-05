@@ -15,4 +15,7 @@ if (!$conn) {
     if(!isset($_SESSION["errors"])){
         $_SESSION["errors"] = array();
     }
+    if(!isset($_SESSION["mail_set"])){
+        include "setMail.php";
+    }
 }

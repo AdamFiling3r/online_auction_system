@@ -346,3 +346,31 @@ function selectAll($conn, $tableName)
         }
     }
 }
+
+function sendAuctionMails($seller, $buyer, $name){
+
+    $_SESSION["mail"]->Subject = "You have won an auction!";
+
+//Enable HTML
+//Attachment
+//E_ses$_SESSION["mail"] body
+$_SESSION["mail"]->Body = "Congratulation, you have won" . $name . ". See your profile for more information.";
+//Add recipient
+$_SESSION["mail"]->addAddress($buyer);
+//Finally send e_ses$_SESSION["mail"]
+if ( $_SESSION["mail"]->send() ) {
+    $_SESSION["mail"]->Subject = "Your auction has ended";
+    $_SESSION["mail"]->Body = "Your offer". $name ."has ended. See your profile for more information.";
+    $_SESSION["mail"]->addAddress($seller);
+    if($_SESSION["mail"]->send()){
+        echo("good");
+    }else{
+        print_r("bad: ". $_SESSION["mail"]->ErrorInfo);
+    }
+}else{
+    print_r("Message could not be sent. _ Error: ".$_SESSION["mail"]->ErrorInfo);
+}
+//Closing smtp connection
+$_SESSION["mail"]->smtpClose();
+
+}
