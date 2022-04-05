@@ -1,6 +1,9 @@
 <?php
 
 if(isset($_POST['submit'])){
+    foreach ($_SESSION["errors"] as $key => $_SESSION["errors"]){
+        unset($_SESSION["errors"][$key]);
+    }
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -8,7 +11,8 @@ if(isset($_POST['submit'])){
     require_once 'function.inc.php';
 
     if(emptyInputLogin($username, $password) == true){
-      header("location: ../login_empty_error.php");
+      array_push($_SESSION['errors'], 'emptyInputLogin');
+      header("location: ". $_SERVER["HTTP_REFERER"]);
       exit();
     }else{
       loginUser($conn, $username, $password);

@@ -12,4 +12,7 @@ if (!$conn) {
 } else {
     session_start();
     $_SESSION["result"] = selectAll($conn, "offers");
+    if(!isset($_SESSION["errors"])){
+        $_SESSION["errors"] = array();
+    }
 }

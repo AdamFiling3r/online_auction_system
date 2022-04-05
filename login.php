@@ -50,6 +50,26 @@ require_once "includes/connect.php";
                 <label class="form-label" for="password">Password</label>
               </div>
 
+              <div class="form-outline form-white mb-4">
+                <ul>
+                    
+                <?php
+                    if (in_array('emptyInputLogin', $_SESSION["errors"])) {
+                      echo "<li>Enter Username (Email) and Password</li>";
+                    }
+                    if (in_array('userNotExists', $_SESSION["errors"])) {
+                      echo "<li>This user doesn't exist.</li>";
+                    }
+                    if (in_array('wrongPassword', $_SESSION["errors"])) {
+                      echo "<li>Wrong password</li>";
+                    
+                    }
+                     
+                
+                ?>
+              </ul>
+              </div>
+
               <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 
               <button class="btn btn-outline-light btn-lg px-5" type="submit" name="submit">Login</button>

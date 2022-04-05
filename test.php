@@ -59,4 +59,6 @@ require_once "includes/connect.php";
 // }else{
 // echo("big failure");
 // }
-print_r(selectAllWhere($conn, "users", "id", 2)[0][3]);
+
+$array = array();
+array_push($array, "hello");
