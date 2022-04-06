@@ -1,7 +1,12 @@
 <?php
 
+require_once 'connect.php';
+require_once 'function.inc.php';
 
 if(isset($_POST["submit"])){
+    if(sizeof($_SESSION['errors']) > 0){
+        $_SESSION["errors"] = array();
+      }
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $email = $_POST['email'];
@@ -9,37 +14,30 @@ if(isset($_POST["submit"])){
     $password = $_POST['password'];
     $rep_password = $_POST['rep_password'];
 
-    require_once 'connect.php';
-    require_once 'function.inc.php';
 
     if(emptyInputRegister($first_name, $last_name, $email, $username, $password, $rep_password) !== false){
         array_push($_SESSION['errors'], 'emptyInputRegister');
-        header("location: ". $_SESSION["HTTP_REFERER"]);
-        header("location: ../register.php?error=emptyinput");
+        header("location: ". $_SERVER["HTTP_REFERER"]);
         exit();
     }
     if(invalidUsername($username) !== false){
         array_push($_SESSION['errors'], 'invalidUsernameRegister');
-        header("location: ". $_SESSION["HTTP_REFERER"]);
-        header("location: ../register.php?error=invalidusername");
+        header("location: ". $_SERVER["HTTP_REFERER"]);
         exit();
     }
     if(invalidEmail($email) !== false){
         array_push($_SESSION['errors'], 'invalidEmailRegister');
-        header("location: ". $_SESSION["HTTP_REFERER"]);
-        header("location: ../register.php?error=invalidemail");
+        header("location: ". $_SERVER["HTTP_REFERER"]);
         exit();
     }
     if(passNotMach($password, $rep_password) !== false){
-        array_push($_SESSION['errors'], 'passNotMachRegister');
-        header("location: ". $_SESSION["HTTP_REFERER"]);
-        header("location: ../register.php?error=passnotmach");
+        array_push($_SESSION['errors'], 'passNotMatchRegister');
+        header("location: ". $_SERVER["HTTP_REFERER"]);
         exit();
     }
     if(userExists($username, $email, $conn) !== false){
         array_push($_SESSION['errors'], 'userExistsRegister');
-        header("location: ". $_SESSION["HTTP_REFERER"]);
-        header("location: ../register.php?error=userexists");
+        header("location: ". $_SERVER["HTTP_REFERER"]);
         exit();
     }
 

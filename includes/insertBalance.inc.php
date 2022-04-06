@@ -3,6 +3,9 @@ include_once "connect.php";
 include_once "function.inc.php";
 
     if(isset($_POST["submit"])){
+        if(sizeof($_SESSION['errors']) > 0){
+            $_SESSION["errors"] = array();
+          }
         $balance = intval($_POST["balance"]);
         $url = "../insertMoney.php";
         if($balance){
@@ -12,15 +15,17 @@ include_once "function.inc.php";
             update($conn, "users", "balance", $balance, "id", $_SESSION["id"], $url);
             header("location: ../index.php");
         }else{
-            header("location: ../insertMoney.php?error=wrongInput");
+            array_push($_SESSION["errors"], "negativeNum");
+            header("location: ".$_SERVER["HTTP_REFERER"]);
             exit();
         }
     }else{
-        header("location: ../insertMoney.php?error=inputNotNum");
+        array_push($_SESSION["errors"], "notNum");
+        header("location: ".$_SERVER["HTTP_REFERER"]);
         exit();
     }
  }else{
-     header("location: ../insertMoney.php?erorr=wrongAproach");
+     header("location: ../index.php");
      exit();
  }
     

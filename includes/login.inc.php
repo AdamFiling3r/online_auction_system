@@ -1,14 +1,14 @@
 <?php
+require_once 'connect.php';
+require_once 'function.inc.php';
 
 if(isset($_POST['submit'])){
-    foreach ($_SESSION["errors"] as $key => $_SESSION["errors"]){
-        unset($_SESSION["errors"][$key]);
-    }
+  if(sizeof($_SESSION['errors']) > 0){
+    $_SESSION["errors"] = array();
+  }
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    require_once 'connect.php';
-    require_once 'function.inc.php';
 
     if(emptyInputLogin($username, $password) == true){
       array_push($_SESSION['errors'], 'emptyInputLogin');

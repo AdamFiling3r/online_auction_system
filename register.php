@@ -71,7 +71,27 @@ require_once "includes/connect.php";
                     </div>
       
                     <button class="btn btn-outline-light btn-lg px-5" type="submit" name="submit">Register</button>
-      
+                    
+
+                    <div class="form-outline form-white mb-4">
+                        <?php
+                        if (in_array('emptyInputRegister', $_SESSION["errors"])) {
+                          echo "<li>Fill all fields</li>";
+                        }
+                        if (in_array('invalidUsernameRegister', $_SESSION["errors"])) {
+                          echo "<li>Invalid username</li>";
+                        }
+                        if (in_array('invalidEmailRegister', $_SESSION["errors"])) {
+                          echo "<li>Invalid email</li>";
+                        }
+                        if (in_array('passNotMatchRegister', $_SESSION["errors"])) {
+                          echo "<li>Password don't match</li>";
+                        }
+                        if (in_array('userExistsRegister', $_SESSION["errors"])) {
+                          echo "<li>User already exists</li>";
+                        }
+                        ?>
+                    </div>
       
                   </div>
       

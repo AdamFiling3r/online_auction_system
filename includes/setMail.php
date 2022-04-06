@@ -1,7 +1,7 @@
 <?php
-require "../PHPMailer/vendor/phpmailer/phpmailer/src/PHPMailer.php";
-require "../PHPMailer/vendor/phpmailer/phpmailer/src/SMTP.php";
-require "../PHPMailer/vendor/phpmailer/phpmailer/src/Exception.php";
+require "C:/xampp/htdocs/rocnikovka_aukce/PHPMailer/vendor/phpmailer/phpmailer/src/PHPMailer.php";
+require "C:/xampp/htdocs/rocnikovka_aukce/PHPMailer/vendor/phpmailer/phpmailer/src/SMTP.php";
+require "C:/xampp/htdocs/rocnikovka_aukce/PHPMailer/vendor/phpmailer/phpmailer/src/Exception.php";
 //Define name spaces
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

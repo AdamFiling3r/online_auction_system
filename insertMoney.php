@@ -41,6 +41,17 @@ include_once "includes/connect.php";
               </div>
             </div>
             <button class="btn btn-outline-light btn-lg px-5" type="submit" name="submit">Submit</button>
+            <div class="form-outline form-white mb-4">
+              <?php
+              if (in_array('negativeNum', $_SESSION["errors"])) {
+                echo "<li>Insert positive value</li>";
+              }
+              if (in_array('notNum', $_SESSION["errors"])) {
+                echo "<li>Insert numeric value</li>";
+              }
+              
+              ?>
+              </div>        
           </div>
         </div>
       </div>
