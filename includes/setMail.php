@@ -1,7 +1,7 @@
 <?php
-require "C:/xampp/htdocs/rocnikovka_aukce/PHPMailer/vendor/phpmailer/phpmailer/src/PHPMailer.php";
-require "C:/xampp/htdocs/rocnikovka_aukce/PHPMailer/vendor/phpmailer/phpmailer/src/SMTP.php";
-require "C:/xampp/htdocs/rocnikovka_aukce/PHPMailer/vendor/phpmailer/phpmailer/src/Exception.php";
+require "PHPMailer/vendor/phpmailer/phpmailer/src/PHPMailer.php";
+require "PHPMailer/vendor/phpmailer/phpmailer/src/SMTP.php";
+require "PHPMailer/vendor/phpmailer/phpmailer/src/Exception.php";
 //Define name spaces
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -23,4 +23,5 @@ $_SESSION["mail"]->Username = "oas.emails@gmail.com";
 //Set gmail password
 $_SESSION["mail"]->Password = "mjdueh96756*";
 //Set sender e_ses$_SESSION["mail"]
-$_SESSION["mail"]->setFrom('adam.filinger@gmail.com');
+$_SESSION["mail"]->setFrom('oas.emails@gmail.com');
+$_SESSION["mail_set"] = true;
