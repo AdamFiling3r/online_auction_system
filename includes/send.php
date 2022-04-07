@@ -1,5 +1,6 @@
 <?php
 require_once "connect.php";
+require_once "function.inc.php";
 $auction = searchArray(2, $_GET["offer_id"]);
 $buyer = selectAllWhere($conn, "users", "id", $auction[0][6])[0][6] - $auction[0][4];
 $seller = selectAllWhere($conn, "users", "id", $auction[0][1])[0][6] + $auction[0][4];
