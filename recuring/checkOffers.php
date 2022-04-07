@@ -8,20 +8,18 @@ include_once "../includes/function.inc.php";
         update($conn, "offers", "sold", 1, "expiration_date<", date("Y-m-d"), $_SERVER["REQUEST_URI"]);
         if($closedOffers[$i][6] != 0){
             insert($conn, 5, "orders", "Uid_sell", "Uid_buy", "amount", "sent", "offer_id", $closedOffers[$i][1], $closedOffers[$i][6], $closedOffers[$i][4], 0, $closedOffers[$i][0]);
-            $seller = selectAllWhere($conn, "users", "id", $closedOffers[$i][1])[0][4];
-            $buyer = selectAllWhere($conn, "users", "id", $closedOffers[$i][6])[0][4];
+            $seller = selectAllWhere($conn, "users", "id", $closedOffers[$i][1])[0];
+            $buyer = selectAllWhere($conn, "users", "id", $closedOffers[$i][6])[0];
             $name = fread(fopen("../".$closedOffers[$i][3], "r"), filesize("../".$closedOffers[$i][3]));
-            echo($buyer);
-            echo($seller);
-            echo($name);
-            if(sendAuctionMails($buyer, $seller, $name)){
+
+            if(sendAuctionMails($buyer[4], $seller[4], $buyer[3], $name)){
                 echo("great");
             }else{
                 print_r($_SESSION["mail"]->ErrorInfo);
             }
 
         }else{
-            if(sendFailedOfferMail($seller)){
+            if(sendFailedOfferMail($seller[4], $name)){
                 echo("great");
             }else{
                 print_r($_SESSION["mail"]->ErrorInfo);

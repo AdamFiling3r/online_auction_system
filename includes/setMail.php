@@ -19,8 +19,8 @@ $_SESSION["mail"]->SMTPSecure = "tls";
 //Port to connect smtp
 $_SESSION["mail"]->Port = "587";
 //Set gmail username
-$_SESSION["mail"]->Username = "adam.filinger@gmail.com";
+$_SESSION["mail"]->Username = "oas.emails@gmail.com";
 //Set gmail password
-$_SESSION["mail"]->Password = "DRzoiberk007";
+$_SESSION["mail"]->Password = "mjdueh96756*";
 //Set sender e_ses$_SESSION["mail"]
 $_SESSION["mail"]->setFrom('adam.filinger@gmail.com');

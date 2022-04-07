@@ -351,22 +351,22 @@ function selectAll($conn, $tableName)
     }
 }
 
-function sendAuctionMails($seller, $buyer, $name){
+function sendAuctionMails($sellerMail, $buyerMail, $sellerName, $name){
 
     $_SESSION["mail"]->Subject = "You have won an auction!";
 
         //Enable HTML
                     //Attachment
             //E_ses$_SESSION["mail"] body
-            $_SESSION["mail"]->Body = "Congratulation, you have won " . $name . ". See your profile for more information.";
+            $_SESSION["mail"]->Body = "Congratulation, you have won " . $name . " from ".$sellerName.". Waiting for seller to send the item.";
         //Add recipient
-        $_SESSION["mail"]->addAddress($buyer);
+        $_SESSION["mail"]->addAddress($buyerMail);
         //Finally send e_ses$_SESSION["mail"]
             if ( $_SESSION["mail"]->send() ) {
             $_SESSION["mail"]->Subject = "Your auction has ended";
-    $_SESSION["mail"]->Body = "Your offer ". $name ." has ended. See your profile for more information.";
+    $_SESSION["mail"]->Body = "Your offer ". $name ." has ended. Go to To Send category in My Profile and confirm sending this item.";
     $_SESSION["mail"]->clearAllRecipients();
-    $_SESSION["mail"]->addAddress($seller);
+    $_SESSION["mail"]->addAddress($sellerMail);
     if($_SESSION["mail"]->send()){
         echo("good");
     }else{
@@ -399,13 +399,13 @@ function sendVerificationMail($Uid, $UEmail, $token){
             $_SESSION["mail"]->smtpClose();
 }
 
-function sendFailedOfferMail($UEmail){
+function sendFailedOfferMail($UEmail, $offer){
     $_SESSION["mail"]->Subject = "Your offers has not been sold!";
 
         //Enable HTML
                     //Attachment
             //E_ses$_SESSION["mail"] body
-            $_SESSION["mail"]->Body = "Your offer was not sold, try setting your offer again.";
+            $_SESSION["mail"]->Body = "Your offer ". $offer ." was not sold, try setting it up again.";
         //Add recipient
         $_SESSION["mail"]->addAddress($UEmail);
         //Finally send e_ses$_SESSION["mail"]
