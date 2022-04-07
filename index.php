@@ -1,5 +1,6 @@
 <?php
 require_once "includes/connect.php";
+$_SESSION["errors"] = array();
 ?>
 
 <!DOCTYPE html>

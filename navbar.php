@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
         <?php
-        if ($_SESSION["loggedin"] === true) {
+        if (isset($_SESSION["loggedin"])) {
           include_once("navbar_loged.php");
         }else{
           include_once("navbar_base.php");

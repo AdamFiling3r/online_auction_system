@@ -30,7 +30,7 @@ include_once "navbar.php";
             
             for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
                 if ($_SESSION["result"][$y][1] == $_SESSION["id"]) {
-                        include("includes/template_card.inc.php");
+                        include("HTML_templates/template_card.inc.php");
                 }
             }
             break;
@@ -39,7 +39,7 @@ include_once "navbar.php";
             for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
                 if ($_SESSION["result"][$y][6] == $_SESSION["id"]) {
                     if ($_SESSION["result"][$y][7] == 0) {
-                        include("includes/template_card.inc.php");
+                        include("HTML_templates/template_card.inc.php");
                     }
                 }
             }
@@ -49,7 +49,7 @@ include_once "navbar.php";
             for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
                 if ($_SESSION["result"][$y][6] == $_SESSION["id"]) {
                     if ($_SESSION["result"][$y][7] == 1) {
-                        include("includes/template_card.inc.php");
+                        include("HTML_templates/template_card.inc.php");
                     }
                 }
             }
@@ -59,7 +59,7 @@ include_once "navbar.php";
             for ($y = 0; $y < sizeof($_SESSION["result"]); $y++) {
                 if ($_SESSION["result"][$y][1] == $_SESSION["id"]) {
                     if (($_SESSION["result"][$y][7] == 1) && (selectAllWhere($conn, "orders", "offer_id", $_SESSION["result"][$y][0])[0][4] == 0)) {
-                        include("includes/template_card.inc.php");
+                        include("HTML_templates/template_card.inc.php");
                     }
                 }
             }

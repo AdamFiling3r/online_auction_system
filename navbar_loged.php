@@ -4,12 +4,12 @@
   <i class="bi bi-person-fill text-dark"></i>
   </button>
   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton1">
-    <li><a class="dropdown-item text-success" href="templates.php?template_id=1">My Auctions</a></li>
-    <li><a class="dropdown-item text-success" href="templates.php?template_id=2">My Bids</a></li>
-    <li><a class="dropdown-item text-success" href="templates.php?template_id=3">My purchases</a></li>
-    <li><a class="dropdown-item text-success" href="templates.php?template_id=4">To send</a></li>
+    <li><a class="dropdown-item text-success" href="auctionList.php?template_id=1">My Auctions</a></li>
+    <li><a class="dropdown-item text-success" href="auctionList.php?template_id=2">My Bids</a></li>
+    <li><a class="dropdown-item text-success" href="auctionList.php?template_id=3">My purchases</a></li>
+    <li><a class="dropdown-item text-success" href="auctionList.php?template_id=4">To send</a></li>
     <li><hr class="dropdown-divider"></li>
-    <li><a class="dropdown-item text-warning" href="#">User: <?php echo ($_SESSION["username"]); ?></a></li>
+    <li><a class="dropdown-item text-warning" href="user.php">User: <?php echo ($_SESSION["username"]); ?></a></li>
     <li><a class="dropdown-item text-warning" href="logout.php">Logout</a></li>
     
   </ul>

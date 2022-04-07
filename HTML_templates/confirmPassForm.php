@@ -21,6 +21,26 @@
                                     <button class="btn btn-outline-light btn-lg px-5" type="submit" name="submit">
                                         Submit
                                     </button>
+                                    <div class="form-outline form-white mb-4">
+                          <?php
+                          
+                          if (in_array('passNotCorrect', $_SESSION["errors"])) {
+                            echo "<li>Wrong password</li>";
+                          }
+                          if (in_array('smallBalance', $_SESSION["errors"])) {
+                            echo "<li>Your balance is too small for this bid</li>";
+                          }
+                          if (in_array('enterPass', $_SESSION["errors"])) {
+                            echo "<li>Enter your password to verify</li>";
+                          }
+                          if (in_array('enterBid', $_SESSION["errors"])) {
+                            echo "<li>Enter your bid</li>";
+                          }
+                          
+                          
+                          ?>
+                        </div>
+
                                 </div>
                             </div>
                         </div>

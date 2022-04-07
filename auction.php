@@ -40,6 +40,10 @@ include_once("navbar.php");
                         <?php echo $auction[0][4] ?>
                     </p>
                     <p class="lead my-4">
+                        Created by:
+                        <?php echo (selectAllWhere($conn, "users", "id", $auction[0][1])[0][3]) ?>
+                    </p>
+                    <p class="lead my-4">
                         Last bidder:
                         <?php if($auction[0][6] == 0){
                             echo "No bids yet";
@@ -57,17 +61,17 @@ include_once("navbar.php");
     <?php
     if($auction[0][7] != 1){
         if($auction[0][1] != $_SESSION["id"]){
-        require_once("includes/confirmPassForm.php");
+        require_once("HTML_templates/confirmPassForm.php");
         }
     }else{
         if(selectAllWhere($conn, "orders", "offer_id", $auction[0][0])[0][4] == 0 ){
             if($auction[0][1] == $_SESSION["id"]){
                 echo('<button class="btn btn-success btn-lg my-4"> <a href="includes/send.php?offer_id='. $auction[0][0] .'" class="text-dark" style="text-decoration: none;">Send</a></button>');
             }else{
-                require_once("includes/waitingMess.php");
+                require_once("HTML_templates/waitingMess.php");
             }
         }else{
-            require_once("includes/soldMess.php");
+            require_once("HTML_templates/soldMess.php");
         }
     }
     ?>

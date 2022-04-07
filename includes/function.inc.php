@@ -62,7 +62,7 @@ function passWrongFormat($pass)
     if (!preg_match("/\W/", $pass)) {
         $result = true;
     }
-    if (preg_match("/\s/", $pass)) {
+    if (!preg_match("/\s/", $pass)) {
         $result = true;
     }
     return $result;
@@ -134,8 +134,9 @@ function createUser($conn, $username, $email, $first_name, $last_name, $password
     mkdir("../users/$username/$user_descrip");
     mkdir("../users/$username/$user_img");
 
-    header("location: ../login.php");
-    exit();
+    $Uid = sizeof(selectAll($conn, "users"));
+    sendVerificationMail($Uid, $email, $token);
+
 }
 
 function emptyInputLogin($username, $password)
@@ -299,12 +300,13 @@ function insert($conn, $numOfParams, $tableName)
 //$id is the id by which you want to search
 function update($conn, $tableName, $setCol, $set, $column, $id, $url)
 {
+    $param = array($set);
     $stmt = mysqli_stmt_init($conn);
-    $sql = "UPDATE $tableName SET $setCol = $set WHERE $column= $id;";
+    $sql = "UPDATE $tableName SET $setCol = ? WHERE $column= $id;";
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         exit("prepareFailed");
     } else {
-        if (mysqli_stmt_execute($stmt)) {
+        if (mysqli_stmt_execute($stmt, $param)) {
             mysqli_stmt_close($stmt);
         } else {
             header("location: $url?execFailed");
@@ -376,4 +378,42 @@ function sendAuctionMails($seller, $buyer, $name){
             //Closing smtp connection
             $_SESSION["mail"]->smtpClose();
 
+}
+
+function sendVerificationMail($Uid, $UEmail, $token){
+    $_SESSION["mail"]->Subject = "Please verify your email!";
+
+        //Enable HTML
+                    //Attachment
+            //E_ses$_SESSION["mail"] body
+            $_SESSION["mail"]->Body = "Please click the following link to verify your account: http://localhost/includes/verification.php?token=$token&Uid=$Uid";
+        //Add recipient
+        $_SESSION["mail"]->addAddress($UEmail);
+        //Finally send e_ses$_SESSION["mail"]
+            if ( $_SESSION["mail"]->send() ) {
+                echo("good");
+        }else{
+    print_r("Message could not be sent. _ Error: ".$_SESSION["mail"]->ErrorInfo);
+            }
+            //Closing smtp connection
+            $_SESSION["mail"]->smtpClose();
+}
+
+function sendFailedOfferMail($UEmail){
+    $_SESSION["mail"]->Subject = "Your offers has not been sold!";
+
+        //Enable HTML
+                    //Attachment
+            //E_ses$_SESSION["mail"] body
+            $_SESSION["mail"]->Body = "Your offer was not sold, try setting your offer again.";
+        //Add recipient
+        $_SESSION["mail"]->addAddress($UEmail);
+        //Finally send e_ses$_SESSION["mail"]
+            if ( $_SESSION["mail"]->send() ) {
+                echo("good");
+        }else{
+    print_r("Message could not be sent. _ Error: ".$_SESSION["mail"]->ErrorInfo);
+            }
+            //Closing smtp connection
+            $_SESSION["mail"]->smtpClose();
 }
