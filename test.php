@@ -38,6 +38,3 @@
 
 require_once "includes/function.inc.php";
 require_once "includes/connect.php";
-echo($_SESSION["password"]);
-echo("     ");
-echo(password_hash("asdf", PASSWORD_DEFAULT));
