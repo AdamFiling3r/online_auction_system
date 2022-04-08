@@ -1,7 +1,9 @@
 <?php
-require "PHPMailer/vendor/phpmailer/phpmailer/src/PHPMailer.php";
-require "PHPMailer/vendor/phpmailer/phpmailer/src/SMTP.php";
-require "PHPMailer/vendor/phpmailer/phpmailer/src/Exception.php";
+$rootDir = realpath($_SERVER["DOCUMENT_ROOT"]);
+
+require "$rootDir/PHPMailer/vendor/phpmailer/phpmailer/src/PHPMailer.php";
+require "$rootDir/PHPMailer/vendor/phpmailer/phpmailer/src/SMTP.php";
+require "$rootDir/PHPMailer/vendor/phpmailer/phpmailer/src/Exception.php";
 //Define name spaces
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
